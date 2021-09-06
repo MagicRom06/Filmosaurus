@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.9.7"
+env:
+  - DJANGO_SETTINGS_MODULE="core.settings"
+services:
+  - postgresql
+  - docker
+install:
+  - pipenv install
+before_script: pip install docker-compose
+script:
+  - docker-compose run web sh -c "python manage.py test"
