@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 django = "*"
 django-environ = "*"
+isort = "*"
+flake8 = "*"
+psycopg2-binary = "*"
+django-redis = "*"
 
 [dev-packages]
 

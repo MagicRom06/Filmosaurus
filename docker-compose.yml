@@ -8,3 +8,22 @@ services:
       - .:/code
     ports:
       - 8000:8000
+    depends_on: 
+      - db
+      - cache
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment: 
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+  cache:
+    image: redis
+    volumes:
+      - redis_data:/var/lib/redis/data/
+    environment: 
+      - "ALLOW_EMPTY_PASSWORD=yes"
+
+volumes:
+  postgres_data:
+  redis_data:
