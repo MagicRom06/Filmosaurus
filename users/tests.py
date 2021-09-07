@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
 from django.test import TestCase
 
 # Create your tests here.
+
 
 class CustomUserTests(TestCase):
 
