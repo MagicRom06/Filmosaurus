@@ -8,13 +8,16 @@ services:
   - docker
 install:
   - pipenv install --system
-before_script: pip install docker-compose
+before_script:
+  - pip install docker-compose
+  - cd core/
+  - touch .env
+  - echo SECRET_KEY=$SECRET_KEY > .env
+  - echo DB_NAME=$DB_NAME > .env
+  - echo DB_USER=$DB_USER > .env
+  - echo DB_PASSWORD=$DB_PASSWORD > .env
+  - echo DB_HOST=$DB_HOST > .env
+  - echo DB_PORT=$DB_PORT > .env
+  - echo CACHE_LOCATION=CACHE_LOCATION > .env
 script:
-  - export SECRET_KEY=echo "$SECRET_KEY"
-  - export DB_NAME=echo "$DB_NAME"
-  - export DB_USER=echo "$DB_USER"
-  - export DB_PASSWORD=echo "$DB_PASSWORD"
-  - export DB_HOST=echo "$DB_HOST"
-  - export DB_PORT=echo "$DB_PORT"
-  - export CACHE_LOCATION=echo "$CACHE_LOCATION"
   - docker-compose run web sh -c "python manage.py test"
