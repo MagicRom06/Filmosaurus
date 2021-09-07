@@ -10,6 +10,7 @@ isort = "*"
 flake8 = "*"
 psycopg2-binary = "*"
 django-redis = "*"
+django-tailwind = "*"
 
 [dev-packages]
 
