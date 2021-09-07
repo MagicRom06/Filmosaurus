@@ -3,13 +3,6 @@ python:
   - "3.9"
 env:
   - DJANGO_SETTINGS_MODULE="core.settings"
-services:
-  - postgresql
-  - docker
-install:
-  - pipenv install --system
-before_script: pip install docker-compose
-script:
   - export SECRET_KEY=$SECRET_KEY
   - export DB_NAME=$DB_NAME
   - export DB_USER=$DB_USER
@@ -17,4 +10,11 @@ script:
   - export DB_HOST=$DB_HOST
   - export DB_PORT=$DB_PORT
   - export CACHE_LOCATION=$CACHE_LOCATION
+services:
+  - postgresql
+  - docker
+install:
+  - pipenv install --system
+before_script: pip install docker-compose
+script:
   - docker-compose run web sh -c "python manage.py test"
