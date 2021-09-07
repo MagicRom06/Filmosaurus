@@ -11,6 +11,8 @@ services:
     depends_on: 
       - db
       - cache
+    environment: 
+      - SECRET_KEY=${SECRET_KEY}
   db:
     image: postgres
     volumes:
