@@ -10,12 +10,14 @@ install:
   - pipenv install --system
 before_script:
   - pip install docker-compose
-  - export SECRET_KEY=test
-  - export DB_NAME=filmosaurus
-  - export DB_USER=postgres
-  - export DB_PASSWORD=postgres
-  - export DB_HOST=db
-  - export DB_PORT=5432
-  - export CACHE_LOCATION=cache
+  - cd core/
+  - touch .env
+  - echo SECRET_KEY=$SECRET_KEY >> .env
+  - echo DB_NAME=$DB_NAME >> .env
+  - echo DB_USER=$DB_USER >> .env
+  - echo DB_PASSWORD=$DB_PASSWORD >> .env
+  - echo DB_HOST=$DB_HOST >> .env
+  - echo DB_PORT=$DB_PORT >> .env
+  - echo CACHE_LOCATION=CACHE_LOCATION >> .env
 script:
   - docker-compose run web sh -c "python manage.py test"
