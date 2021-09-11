@@ -11,6 +11,7 @@ flake8 = "*"
 psycopg2-binary = "*"
 django-redis = "*"
 django-tailwind = "*"
+coverage = "*"
 
 [dev-packages]
 

@@ -3,7 +3,6 @@ from django.test import TestCase
 
 # Create your tests here.
 
-
 class CustomUserTests(TestCase):
 
     def test_create_user(self):

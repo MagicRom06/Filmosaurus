@@ -20,4 +20,4 @@ before_script:
   - echo DB_PORT=$DB_PORT >> .env
   - echo CACHE_LOCATION=CACHE_LOCATION >> .env
 script:
-  - docker-compose run web sh -c "python manage.py test"
+  - docker-compose run web sh -c "flake8 . && python manage.py test"
