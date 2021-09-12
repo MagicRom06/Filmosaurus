@@ -7,4 +7,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         csv = Movie.load()
-        Movie.parse(csv)
+        movies = Movie.parse(csv)
+        for movie in movies:
+            print(movie.country)
