@@ -12,6 +12,7 @@ psycopg2-binary = "*"
 django-redis = "*"
 django-tailwind = "*"
 coverage = "*"
+imdbpy = "*"
 
 [dev-packages]
 
