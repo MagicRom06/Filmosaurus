@@ -9,4 +9,4 @@ class Command(BaseCommand):
         csv = Movie.load()
         movies = Movie.parse(csv)
         for movie in movies:
-            print(movie.country)
+            movie.display()

@@ -1,5 +1,6 @@
 import csv
 import os
+import imdb
 
 
 class Movie:
@@ -13,7 +14,8 @@ class Movie:
         category,
         director,
         cast,
-        country
+        country,
+        picture
     ):
         self._imdb_id = imdb_id
         self._title = title
@@ -23,34 +25,32 @@ class Movie:
         self._director = director
         self._cast = cast
         self._country = country
+        self._picture = picture
 
     @staticmethod
     def load():
         path = os.path.dirname(os.path.abspath(__file__))
         file = open(path + '/imdb_movies.csv')
-        return csv.reader(file)
+        reader = csv.reader(file)
+        next(reader)
+        return reader
 
     @staticmethod
     def parse(csv_file):
         list_objects = list()
         for row in csv_file:
-            imdb_id = row[0]
-            title = row[1]
-            year = row[3]
-            plot = row[13]
-            category = row[5]
-            director = row[9]
-            cast = row[12]
-            country = row[7]
+            imdb_id = row[0].replace('tt', '')
             list_objects.append(Movie.get(
                 imdb_id,
-                title,
-                year,
-                plot,
-                category,
-                director,
-                cast,
-                country
+                row[1],
+                row[3],
+                row[13],
+                row[5],
+                row[9],
+                row[12],
+                row[7],
+                # Movie.get_picture(imdb_id)
+                None
             ))
         return list_objects
 
@@ -62,7 +62,8 @@ class Movie:
             category,
             director,
             cast,
-            country):
+            country,
+            picture):
         return Movie(
             imdb_id,
             title,
@@ -71,8 +72,30 @@ class Movie:
             category,
             director,
             cast,
-            country
+            country,
+            picture
         )
+
+    @staticmethod
+    def get_picture(movie_id):
+        ia = imdb.IMDb()
+        movie = ia.get_movie(movie_id)
+        return movie['full-size cover url']
+
+    def display(self):
+        print(f"""
+            ===========================
+            imdb id: {self._imdb_id}
+            title: {self._title}
+            year: {self._year}
+            plot: {self._plot}
+            category: {self._category}
+            director: {self._director}
+            cast: {self._cast}
+            country: {self._country}
+            picture: {self._picture}
+            ===========================
+        """)
 
     def _get_imdb_id(self):
         return self._imdb_id
@@ -98,6 +121,9 @@ class Movie:
     def _get_country(self):
         return self._country
 
+    def _get_picture(self):
+        return self._picture
+
     imdb_id = property(_get_imdb_id)
     title = property(_get_title)
     year = property(_get_year)
@@ -106,3 +132,4 @@ class Movie:
     director = property(_get_director)
     cast = property(_get_cast)
     country = property(_get_country)
+    picture = property(_get_picture)
