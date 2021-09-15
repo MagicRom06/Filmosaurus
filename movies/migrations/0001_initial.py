@@ -14,36 +14,58 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('name', models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
             name='Country',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('name', models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
             name='Person',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('name', models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
             name='Movie',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
                 ('year', models.PositiveIntegerField()),
                 ('picture', models.TextField()),
                 ('plot', models.TextField()),
-                ('cast', models.ManyToManyField(related_name='cast', to='movies.Person')),
-                ('category', models.ManyToManyField(to='movies.Category')),
-                ('country', models.ManyToManyField(to='movies.Country')),
-                ('director', models.ManyToManyField(related_name='director', to='movies.Person')),
+                ('cast', models.ManyToManyField(
+                    related_name='cast',
+                    to='movies.Person')),
+                ('category', models.ManyToManyField(
+                    to='movies.Category')),
+                ('country', models.ManyToManyField(
+                    to='movies.Country')),
+                ('director', models.ManyToManyField(
+                    related_name='director',
+                    to='movies.Person')),
             ],
         ),
     ]
