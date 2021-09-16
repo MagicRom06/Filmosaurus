@@ -1,9 +1,10 @@
 import csv
+from movies.models import Movie
 import os
 import imdb
 
 
-class Movie:
+class MovieToDB:
 
     def __init__(
         self,
@@ -40,7 +41,7 @@ class Movie:
         list_objects = list()
         for row in csv_file:
             imdb_id = row[0].replace('tt', '')
-            list_objects.append(Movie.get(
+            list_objects.append(MovieToDB.get(
                 imdb_id,
                 row[1],
                 row[3],
@@ -64,7 +65,7 @@ class Movie:
             cast,
             country,
             picture):
-        return Movie(
+        return MovieToDB(
             imdb_id,
             title,
             year,
@@ -96,6 +97,14 @@ class Movie:
             picture: {self._picture}
             ===========================
         """)
+
+    @staticmethod
+    def is_empty():
+        try:
+            Movie.objects.all()[0]
+            return False
+        except IndexError:
+            return True
 
     def _get_imdb_id(self):
         return self._imdb_id
