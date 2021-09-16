@@ -13,21 +13,13 @@ class Command(BaseCommand):
         csv = MovieToDB.load()
         movies = MovieToDB.parse(csv)
         if CategoryToDB.is_empty():
-            print('adding categories ...')
             self.insert_categories_to_db(movies)
-            print('categories finished')
         elif CountryToDB.is_empty():
-            print('adding countries ...')
             self.insert_countries_to_db(movies)
-            print('countries finished')
         elif PersonToDB.is_empty():
-            print('adding persons')
             self.insert_cast_to_db(movies)
-            print('persons finished')
         elif MovieToDB.is_empty():
-            print('adding movies')
             self.insert_movies_to_db(movies)
-            print('finished')
 
     def insert_movies_to_db(self, movies_list):
         for movie in movies_list:
