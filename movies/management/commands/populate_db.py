@@ -11,9 +11,13 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         csv = Movie.load()
         movies = Movie.parse(csv)
-        self.insert_categories_to_db(movies)
-        self.insert_countries_to_db(movies)
-        self.insert_cast_to_db(movies)
+        if CategoryToDB.is_empty():
+            self.insert_categories_to_db(movies)
+        elif CountryToDB.is_empty():
+            self.insert_countries_to_db(movies)
+        elif PersonToDB.is_empty():
+            self.insert_cast_to_db(movies)
+        print('OK')
 
     def insert_categories_to_db(self, movies_list):
         categories_list = list()

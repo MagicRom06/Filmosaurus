@@ -12,3 +12,11 @@ class PersonToDB:
             Person.objects.create(
                 name=person
             )
+
+    @staticmethod
+    def is_empty():
+        try:
+            Person.objects.all()[0]
+            return False
+        except IndexError:
+            return True

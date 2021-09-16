@@ -12,3 +12,11 @@ class CountryToDB:
             Country.objects.create(
                 name=country
             )
+
+    @staticmethod
+    def is_empty():
+        try:
+            Country.objects.all()[0]
+            return False
+        except IndexError:
+            return True
