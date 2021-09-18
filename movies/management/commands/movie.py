@@ -1,14 +1,12 @@
 import csv
 from movies.models import Movie
 import os
-import imdb
 
 
 class MovieToDB:
 
     def __init__(
         self,
-        imdb_id,
         title,
         year,
         plot,
@@ -18,7 +16,6 @@ class MovieToDB:
         country,
         picture
     ):
-        self._imdb_id = imdb_id
         self._title = title
         self._year = year
         self._plot = plot
@@ -40,9 +37,7 @@ class MovieToDB:
     def parse(csv_file):
         list_objects = list()
         for row in csv_file:
-            imdb_id = row[0].replace('tt', '')
             list_objects.append(MovieToDB.get(
-                imdb_id,
                 row[1],
                 row[3],
                 row[13],
@@ -56,8 +51,7 @@ class MovieToDB:
         return list_objects
 
     @staticmethod
-    def get(imdb_id,
-            title,
+    def get(title,
             year,
             plot,
             category,
@@ -66,7 +60,6 @@ class MovieToDB:
             country,
             picture):
         return MovieToDB(
-            imdb_id,
             title,
             year,
             plot,
@@ -77,16 +70,9 @@ class MovieToDB:
             picture
         )
 
-    @staticmethod
-    def get_picture(movie_id):
-        ia = imdb.IMDb()
-        movie = ia.get_movie(movie_id)
-        return movie['full-size cover url']
-
     def display(self):
         print(f"""
             ===========================
-            imdb id: {self._imdb_id}
             title: {self._title}
             year: {self._year}
             plot: {self._plot}
@@ -105,9 +91,6 @@ class MovieToDB:
             return False
         except IndexError:
             return True
-
-    def _get_imdb_id(self):
-        return self._imdb_id
 
     def _get_title(self):
         return self._title
@@ -133,7 +116,6 @@ class MovieToDB:
     def _get_picture(self):
         return self._picture
 
-    imdb_id = property(_get_imdb_id)
     title = property(_get_title)
     year = property(_get_year)
     plot = property(_get_plot)

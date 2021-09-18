@@ -9,6 +9,7 @@ class CountryToDB:
     @staticmethod
     def insert(countries_list):
         for country in countries_list:
+            print(country)
             Country.objects.create(
                 name=country
             )

@@ -3,7 +3,7 @@ from .movie import MovieToDB
 from .category import CategoryToDB
 from .country import CountryToDB
 from .person import PersonToDB
-from movies.models import Movie
+from movies.models import Movie, Country, Category, Person
 
 
 class Command(BaseCommand):
@@ -12,19 +12,19 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         csv = MovieToDB.load()
         movies = MovieToDB.parse(csv)
-        if CategoryToDB.is_empty():
-            self.insert_categories_to_db(movies)
-        elif CountryToDB.is_empty():
-            self.insert_countries_to_db(movies)
-        elif PersonToDB.is_empty():
-            self.insert_cast_to_db(movies)
-        elif MovieToDB.is_empty():
-            self.insert_movies_to_db(movies)
+        print('insert categories')
+        self.insert_categories_to_db(movies)
+        print('insert countries')
+        self.insert_countries_to_db(movies)
+        print('insert person')
+        self.insert_cast_to_db(movies)
+        print('insert movies')
+        self.insert_movies_to_db(movies)
 
     def insert_movies_to_db(self, movies_list):
         for movie in movies_list:
+            print(movie.title)
             new_entry = Movie.objects.create(
-                imdb_id=movie.imdb_id,
                 title=movie.title,
                 year=movie.year,
                 picture=movie.picture,
@@ -32,13 +32,13 @@ class Command(BaseCommand):
             )
             new_entry.save()
             for country in movie.country.split(', '):
-                new_entry.country.create(name=country)
+                new_entry.country.add(Country.objects.filter(name=country))
             for category in movie.category.split(', '):
-                new_entry.category.create(name=category)
+                new_entry.category.add(Category.objects.filter(name=category))
             for director in movie.director.split(', '):
-                new_entry.director.create(name=director)
+                new_entry.director.add(Person.objects.filter(name=director))
             for actor in movie.cast.split(', '):
-                new_entry.cast.create(name=actor)
+                new_entry.cast.add(Person.objects.filter(name=actor))
 
     def insert_categories_to_db(self, movies_list):
         categories_list = list()

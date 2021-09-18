@@ -25,15 +25,14 @@ class Country(models.Model):
 
 
 class Movie(models.Model):
-    imdb_id = models.PositiveIntegerField(default=None)
     title = models.CharField(max_length=255)
     year = models.PositiveIntegerField()
     picture = models.TextField(null=True)
     plot = models.TextField()
-    category = models.ManyToManyField(Category)
-    director = models.ManyToManyField(Person, related_name='director')
-    cast = models.ManyToManyField(Person, related_name='cast')
-    country = models.ManyToManyField(Country)
+    categories = models.ManyToManyField(Category)
+    directors = models.ManyToManyField(Person, related_name='director')
+    casts = models.ManyToManyField(Person, related_name='cast')
+    countries = models.ManyToManyField(Country)
 
     def __str__(self):
         return self.title

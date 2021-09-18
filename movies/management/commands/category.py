@@ -9,6 +9,7 @@ class CategoryToDB:
     @staticmethod
     def insert(categories_list):
         for category in categories_list:
+            print(category)
             Category.objects.create(
                 name=category
             )
