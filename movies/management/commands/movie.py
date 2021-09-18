@@ -1,10 +1,13 @@
 import imdb
 import csv
-from movies.models import Movie
 import os
 
 
 class MovieToDB:
+    """
+    class used for insert
+    Movies on DB
+    """
 
     def __init__(
         self,
@@ -28,6 +31,9 @@ class MovieToDB:
 
     @staticmethod
     def load():
+        """
+        Load CSV file
+        """
         path = os.path.dirname(os.path.abspath(__file__))
         file = open(path + '/imdb_movies.csv')
         reader = csv.reader(file)
@@ -36,6 +42,11 @@ class MovieToDB:
 
     @staticmethod
     def parse(csv_file):
+        """
+        Parse CSV file and get data we need
+        (title, year, plot, category, director,
+        cast, country, picture)
+        """
         list_objects = list()
         for row in csv_file:
             list_objects.append(MovieToDB.get(
@@ -46,9 +57,9 @@ class MovieToDB:
                 row[9],
                 row[12],
                 row[7],
-                # MovieToDB.get_picture(row[0].split('tt')[1])
-                None
+                MovieToDB.get_picture(row[0].split('tt')[1])
             ))
+            print(row[0].split('tt')[1])
         return list_objects
 
     @staticmethod
@@ -60,6 +71,9 @@ class MovieToDB:
             cast,
             country,
             picture):
+        """
+        Instanciate movie object
+        """
         return MovieToDB(
             title,
             year,
@@ -72,6 +86,9 @@ class MovieToDB:
         )
 
     def display(self):
+        """
+        display movies in readable way
+        """
         print(f"""
             ===========================
             title: {self._title}
@@ -87,17 +104,12 @@ class MovieToDB:
 
     @staticmethod
     def get_picture(movie_id):
+        """
+        get picture link from imdb python wrapper
+        """
         ia = imdb.IMDb()
         movie = ia.get_movie(movie_id)
         return movie['full-size cover url']
-
-    @staticmethod
-    def is_empty():
-        try:
-            Movie.objects.all()[0]
-            return False
-        except IndexError:
-            return True
 
     def _get_title(self):
         return self._title

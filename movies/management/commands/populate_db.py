@@ -12,16 +12,16 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         csv = MovieToDB.load()
         movies = MovieToDB.parse(csv)
-        print('insert categories')
         self.insert_categories_to_db(movies)
-        print('insert countries')
         self.insert_countries_to_db(movies)
-        print('insert person')
         self.insert_cast_to_db(movies)
-        print('insert movies')
         self.insert_movies_to_db(movies)
 
     def insert_movies_to_db(self, movies_list):
+        """
+        Insert movies with manytomany relation
+        in DB
+        """
         for movie in movies_list:
             print(movie.title)
             if Movie.objects.filter(
@@ -48,6 +48,9 @@ class Command(BaseCommand):
                     new_entry.casts.add(Person.objects.get(name=actor))
 
     def insert_categories_to_db(self, movies_list):
+        """
+        Insert categories on DB
+        """
         categories_list = list()
         for movie in movies_list:
             for category in movie.category.split(', '):
@@ -56,6 +59,9 @@ class Command(BaseCommand):
         CategoryToDB.insert(categories_list)
 
     def insert_countries_to_db(self, movies_list):
+        """
+        Insert countries on DB
+        """
         countries_list = list()
         for movie in movies_list:
             for country in movie.country.split(', '):
@@ -64,6 +70,9 @@ class Command(BaseCommand):
         CountryToDB.insert(countries_list)
 
     def insert_cast_to_db(self, movies_list):
+        """
+        Insert persons on DB
+        """
         person_list = list()
         actor_list = list()
         director_list = list()
