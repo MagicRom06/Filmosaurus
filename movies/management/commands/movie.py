@@ -1,3 +1,4 @@
+import imdb
 import csv
 from movies.models import Movie
 import os
@@ -45,7 +46,7 @@ class MovieToDB:
                 row[9],
                 row[12],
                 row[7],
-                # Movie.get_picture(imdb_id)
+                # MovieToDB.get_picture(row[0].split('tt')[1])
                 None
             ))
         return list_objects
@@ -83,6 +84,12 @@ class MovieToDB:
             picture: {self._picture}
             ===========================
         """)
+
+    @staticmethod
+    def get_picture(movie_id):
+        ia = imdb.IMDb()
+        movie = ia.get_movie(movie_id)
+        return movie['full-size cover url']
 
     @staticmethod
     def is_empty():

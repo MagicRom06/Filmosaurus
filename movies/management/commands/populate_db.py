@@ -24,21 +24,28 @@ class Command(BaseCommand):
     def insert_movies_to_db(self, movies_list):
         for movie in movies_list:
             print(movie.title)
-            new_entry = Movie.objects.create(
+            if Movie.objects.filter(
                 title=movie.title,
-                year=movie.year,
-                picture=movie.picture,
-                plot=movie.plot
-            )
-            new_entry.save()
-            for country in movie.country.split(', '):
-                new_entry.country.add(Country.objects.filter(name=country))
-            for category in movie.category.split(', '):
-                new_entry.category.add(Category.objects.filter(name=category))
-            for director in movie.director.split(', '):
-                new_entry.director.add(Person.objects.filter(name=director))
-            for actor in movie.cast.split(', '):
-                new_entry.cast.add(Person.objects.filter(name=actor))
+                year=movie.year
+            ).exists():
+                print(f'{movie.title} exists')
+            else:
+                new_entry = Movie.objects.create(
+                    title=movie.title,
+                    year=movie.year,
+                    picture=movie.picture,
+                    plot=movie.plot
+                )
+                new_entry.save()
+                for country in movie.country.split(', '):
+                    new_entry.countries.add(Country.objects.get(name=country))
+                for category in movie.category.split(', '):
+                    new_entry.categories.add(
+                        Category.objects.get(name=category))
+                for director in movie.director.split(', '):
+                    new_entry.directors.add(Person.objects.get(name=director))
+                for actor in movie.cast.split(', '):
+                    new_entry.casts.add(Person.objects.get(name=actor))
 
     def insert_categories_to_db(self, movies_list):
         categories_list = list()

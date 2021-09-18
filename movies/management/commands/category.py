@@ -9,15 +9,10 @@ class CategoryToDB:
     @staticmethod
     def insert(categories_list):
         for category in categories_list:
-            print(category)
-            Category.objects.create(
-                name=category
-            )
-
-    @staticmethod
-    def is_empty():
-        try:
-            Category.objects.all()[0]
-            return False
-        except IndexError:
-            return True
+            if Category.objects.filter(name=category).exists():
+                print(f"{category} exists")
+            else:
+                print(f"{category} not exists")
+                Category.objects.create(
+                    name=category
+                )
