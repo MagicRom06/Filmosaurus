@@ -4,10 +4,15 @@
 {% block body %}
 <section id="welcome" class="home-section">
     <div class="container">
-        <div class="row">
+        <div class="row d-none d-lg-block">
             <div class='console-container'>
                 <span id='text'></span>
                 <div class='console-underscore' id='console'>&#95;</div>
+            </div>
+        </div>
+        <div class="row d-lg-none">
+            <div class="console-container">
+                Welcome
             </div>
         </div>
         <hr>
@@ -17,7 +22,7 @@
             <div type="button" data-bs-toggle="collapse" data-bs-target="#save_message" aria-expanded="false" aria-controls="save_message" id="save-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10">#3 Save</div>
             <div type="button" data-bs-toggle="collapse" data-bs-target="#watch_message" aria-expanded="false" aria-controls="save_message" id="watch-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10">#4 Watch</div>
         </div>
-        <div class="row">
+        <div class="row d-none d-lg-block">
             <div class="offset-1 col-10">
                 <div class="collapse  welcome-collapse" id="login_message">
                     <div class="card card-body">

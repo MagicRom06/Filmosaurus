@@ -21,7 +21,7 @@ class HomePageTests(TestCase):
         self.assertTemplateUsed(self.response, 'home/home.html')
 
     def test_homepage_contains_correct_html(self):
-        self.assertContains(self.response, 'Bienvenue')
+        self.assertContains(self.response, 'Watch and enjoy !')
 
     def test_homepage_url_resolves_homepageview(self):
         view = resolve('/')
