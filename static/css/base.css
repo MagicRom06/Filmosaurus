@@ -1,3 +1,82 @@
-h1 {
-    color:red;
+@font-face {
+    font-family: 'yorkwhiteletter';
+    src: local('yorkwhiteletter'),
+    url('../fonts/yorkwhiteletter.ttf') format("truetype");
+}
+
+.navbar {
+    background-color: rgba(121, 175, 175);
+}
+
+.brand-text{
+    background-color: #1F201F;
+    color:rgba(246, 248, 255);
+    font-size:50px;
+    font-family:'yorkwhiteletter';
+}
+
+.nav-link {
+    font-size:20px;
+    font-family: 'Audiowide', cursive;
+    color:rgba(244, 238, 214) !important;
+    padding-bottom:5px;
+    background: linear-gradient(rgba(202, 121, 90), rgba(202, 121, 90)) center bottom; /*OR bottom right OR bottom left*/
+    background-size: 0% 2px;
+    background-repeat:no-repeat;
+    transition: all 0.45s;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    background-size: 100% 2px;
+  }
+
+.home-section {
+    height:100vh;
+}
+
+#welcome {
+    background-color: rgba(114, 166, 169);
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background: linear-gradient(to bottom, rgba(114, 166, 169, 0.5) 0%, rgba(114, 166, 169, 0.3) 100%), url("../images/home-section-1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#search {
+    background-color: rgba(220, 213, 196);
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background: linear-gradient(to bottom, rgba(220, 213, 196, 0.5) 0%, rgba(220, 213, 196, 0.3) 100%), url("../images/home-section-2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#about {
+    background-color: rgba(202, 121, 90);
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background: linear-gradient(to bottom, rgba(202, 121, 90, 0.5) 0%, rgba(202, 121, 90, 0.3) 100%), url("../images/home-section-3.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+@media (min-width: 993px) {
+    .navbar-brand.abs
+    {
+        position: absolute;
+        width: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        background-color: rgba(121, 175, 175);
+        padding:50px;
+        padding-bottom: 20px;
+        border-radius: 10%;
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    }
 }
