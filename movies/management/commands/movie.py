@@ -57,7 +57,8 @@ class MovieToDB:
                 row[9],
                 row[12],
                 row[7],
-                MovieToDB.get_picture(row[0].split('tt')[1])
+                # MovieToDB.get_picture(row[0].split('tt')[1])
+                None
             ))
             print(row[0].split('tt')[1])
         return list_objects

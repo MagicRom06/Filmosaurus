@@ -12,9 +12,9 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         csv = MovieToDB.load()
         movies = MovieToDB.parse(csv)
-        self.insert_categories_to_db(movies)
-        self.insert_countries_to_db(movies)
-        self.insert_cast_to_db(movies)
+        # self.insert_categories_to_db(movies)
+        # self.insert_countries_to_db(movies)
+        # self.insert_cast_to_db(movies)
         self.insert_movies_to_db(movies)
 
     def insert_movies_to_db(self, movies_list):
