@@ -13,6 +13,8 @@
     color:rgba(246, 248, 255);
     font-size:50px;
     font-family:'yorkwhiteletter';
+    border-left: 7px solid #1F201F;
+    border-right: 7px solid #1F201F;
 }
 
 .nav-link {
