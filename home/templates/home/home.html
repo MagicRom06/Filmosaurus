@@ -17,20 +17,20 @@
         </div>
         <hr>
         <div class="row welcome-row justify-content-center text-center">
-            <div type="button" data-bs-toggle="collapse" data-bs-target="#login_message" aria-expanded="true" aria-controls="login_message" id="login-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10">#1 Login</div>
-            <div type="button" data-bs-toggle="collapse" data-bs-target="#search_message" aria-expanded="true" aria-controls="search_message" id="search-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10">#2 Search</div>
-            <div type="button" data-bs-toggle="collapse" data-bs-target="#save_message" aria-expanded="false" aria-controls="save_message" id="save-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10">#3 Save</div>
-            <div type="button" data-bs-toggle="collapse" data-bs-target="#watch_message" aria-expanded="false" aria-controls="save_message" id="watch-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10">#4 Watch</div>
+            <div type="button" data-bs-toggle="collapse" data-bs-target="#login_message" aria-expanded="true" aria-controls="login_message" id="login-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10 col-10">#1 Login</div>
+            <div type="button" data-bs-toggle="collapse" data-bs-target="#search_message" aria-expanded="true" aria-controls="search_message" id="search-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10 col-10">#2 Search</div>
+            <div type="button" data-bs-toggle="collapse" data-bs-target="#save_message" aria-expanded="false" aria-controls="save_message" id="save-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10 col-10">#3 Save</div>
+            <div type="button" data-bs-toggle="collapse" data-bs-target="#watch_message" aria-expanded="false" aria-controls="save_message" id="watch-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10 col-10">#4 Watch</div>
         </div>
         <div class="row d-none d-lg-block">
             <div class="offset-1 col-10">
                 <div class="collapse  welcome-collapse" id="login_message">
                     <div class="card card-body">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-1">
                                 <span class="welcome-number-steps">#1</span>
                             </div>
-                            <div class="col-10">
+                            <div class="col-11">
                                 The first step is to create an account. Go on the <a href="#">account creation page</a>, follow the instruction.
                             </div>
                         </div>
@@ -39,10 +39,10 @@
                 <div class="collapse welcome-collapse" id="search_message">
                     <div class="card card-body">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-1">
                                 <span class="welcome-number-steps">#2</span>
                             </div>
-                            <div class="col-10">
+                            <div class="col-11">
                                 Then, go to the <a href="#search">search section</a> and type the movie you have in mind.
                             </div>
                         </div>
@@ -51,10 +51,10 @@
                 <div class="collapse welcome-collapse" id="save_message">
                     <div class="card card-body">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-1">
                                 <span class="welcome-number-steps">#3</span>
                             </div>
-                            <div class="col-10">
+                            <div class="col-11">
                                 Once the movie chosen, save it to your watchlist. You can add several movies in order to plan your watching program !
                             </div>
                         </div>
@@ -63,10 +63,10 @@
                 <div class="collapse welcome-collapse" id="watch_message">
                     <div class="card card-body">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-1">
                                 <span class="welcome-number-steps">#4</span>
                             </div>
-                            <div class="col-10">
+                            <div class="col-11">
                                 Watch and enjoy ! but keep the most important in mind ... SVOD is good, but seeing films in a cinema, on the big screen, is better. <strong>Supports movie theaters</strong>
                             </div>
                         </div>
@@ -77,9 +77,28 @@
     </div>
 </section>
 <section id="search" class="home-section">
-    
+    <div class="container">
+        <div class="row">
+            <div class="search-container search-block">
+                <div class="fancy-border">
+                    <span class="search-title ">Search a movie ...</span>
+                    <hr class="text-white">
+                    <form>
+                        <div class="row row-search">
+                            <div class="col-lg-10 col-md-12 col-sm-12 col-12">
+                                <input class="form-control" type="text" required>
+                            </div>
+                            <div class="col-lg-2 col-md-12 col-sm-12 col-12">
+                                <button type="submit" class=" form-control btn btn-search mb-3">Search</button>
+                              </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section id="about" class="home-section">
-    
+
 </section>
 {% endblock body %}
