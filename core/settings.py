@@ -16,9 +16,11 @@ import environ
 import os
 import socket
 
+# config django-debug-toolbar
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
 
+# config env
 env = environ.Env()
 environ.Env.read_env()
 
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
     # local
     'users.apps.UsersConfig',
     'movies.apps.MoviesConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +75,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
