@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Patua+One);
-
 @font-face {
     font-family: 'yorkwhiteletter';
     src: local('yorkwhiteletter'),
@@ -7,7 +5,7 @@
 }
 
 .navbar {
-    background-color: rgba(121, 175, 175);
+    background: #0B1319;
 }
 
 .brand-text{
@@ -21,7 +19,7 @@
 
 .nav-link {
     font-size:20px;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Rye', cursive;
     color:rgba(244, 238, 214) !important;
     padding-bottom:5px;
     background: linear-gradient(rgba(202, 121, 90), rgba(202, 121, 90)) center bottom; /*OR bottom right OR bottom left*/
@@ -41,8 +39,8 @@
 
 #welcome {
     background-color: rgba(114, 166, 169);
-    padding-top: 10rem;
-    padding-bottom: calc(10rem - 4.5rem);
+    padding-top: 15rem;
+    padding-bottom: calc(15rem - 4.5rem);
     background: linear-gradient(to bottom, rgba(114, 166, 169, 0.5) 0%, rgba(114, 166, 169, 0.3) 100%), url("../images/home-section-1.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -51,8 +49,8 @@
 
 #search {
     background-color: rgba(220, 213, 196);
-    padding-top: 10rem;
-    padding-bottom: calc(10rem - 4.5rem);
+    padding-top: 15rem;
+    padding-bottom: calc(15rem - 4.5rem);
     background: linear-gradient(to bottom, rgba(220, 213, 196, 0.5) 0%, rgba(220, 213, 196, 0.3) 100%), url("../images/home-section-2.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -61,8 +59,8 @@
 
 #about {
     background-color: rgba(143, 143, 143);
-    padding-top: 10rem;
-    padding-bottom: calc(10rem - 4.5rem);
+    padding-top: 5rem;
+    padding-bottom: calc(5rem - 4.5rem);
     background: linear-gradient(to bottom, rgba(202, 121, 90, 0.5) 0%, rgba(202, 121, 90, 0.3) 100%), url("../images/home-section-3.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -77,11 +75,7 @@
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
-        background-color: rgba(121, 175, 175);
-        padding:50px;
-        padding-bottom: 20px;
-        border-radius: 5px 10px 15px 30px/30px 15px 10px 5px;
-        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+        background: #0B1319;
     }
 }
 
@@ -92,7 +86,7 @@
 }
 
 .container h3 {
-    font-family:'Audiowide', cursive;
+    font-family: 'Rye', cursive;
 }
 
 .welcome-row {
@@ -102,10 +96,9 @@
     padding:5px;
     margin:5px;
     color:rgba(244, 238, 214);
-    border-radius: 5px 10px 15px 30px/30px 15px 10px 5px;
     background-color: rgba(186, 75, 64);
     font-size: 20px;
-    font-family:'Audiowide', cursive;
+    font-family: 'Rye', cursive;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
@@ -114,7 +107,7 @@
 }
 .console-container {
     
-    font-family:'Audiowide', cursive;
+    font-family: 'Rye', cursive;
     font-size:35px;
     text-align:center;
     width:600px;
@@ -147,7 +140,7 @@
 }
 
 .search-container{
-    font-family:'Audiowide', cursive;
+    font-family: 'Rye', cursive;
     font-size:35px;
     text-align:center;
 }
@@ -175,10 +168,15 @@
     display: block;
 }
 .about-container {
-    font-family:'Audiowide', cursive;
+    font-family: 'Rye', cursive;
     text-align: center;
     font-size:35px;
 }
 .fab {
     color: white;
+}
+.card-step{
+    background: #0B1319;
+    color:white;
+    font-family: 'Courier New', Courier, monospace;
 }

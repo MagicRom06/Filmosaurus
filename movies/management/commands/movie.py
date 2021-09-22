@@ -1,3 +1,4 @@
+from movies.models import Movie
 import imdb
 import csv
 import os
@@ -50,7 +51,7 @@ class MovieToDB:
         list_objects = list()
         for row in csv_file:
             list_objects.append(MovieToDB.get(
-                row[1],
+                row[2],
                 row[3],
                 row[13],
                 row[5],
@@ -60,7 +61,6 @@ class MovieToDB:
                 # MovieToDB.get_picture(row[0].split('tt')[1])
                 None
             ))
-            print(row[0].split('tt')[1])
         return list_objects
 
     @staticmethod
@@ -104,13 +104,55 @@ class MovieToDB:
         """)
 
     @staticmethod
-    def get_picture(movie_id):
+    def get_picture():
         """
         get picture link from imdb python wrapper
         """
         ia = imdb.IMDb()
-        movie = ia.get_movie(movie_id)
-        return movie['full-size cover url']
+        movies = Movie.objects.all().values('title', 'year', 'picture')
+        for movie in movies:
+            if movie['picture'] is None:
+                print(f"{movie['title']} hasn't a picture")
+                try:
+                    imdb_search = ia.search_movie(movie['title'])
+                    for results in imdb_search:
+                        if 'year' in results.keys():
+                            if results[0]['year'] == movie['year']:
+                                picture = MovieToDB.get_picture_imdb(results.getID())
+                                MovieToDB.insert_picture_to_db(
+                                    picture,
+                                    movie['title'],
+                                    movie['year']
+                                )
+                except Exception:
+                    pass
+            else:
+                print(f"{movie['title']} picture ==> OK")
+
+    @staticmethod
+    def insert_picture_to_db(picture, title, year):
+        movie = Movie.objects.get(title=title, year=year)
+        print(movie.picture)
+        movie.picture = picture
+        print(movie.picture)
+        movie.save()
+        print(f"{title}'s picture inserted")
+
+    @staticmethod
+    def get_picture_imdb(movie_id):
+        """
+        get picture link from imdb python wrapper
+        """
+        ia = imdb.IMDb()
+        try:
+            movie = ia.get_movie(movie_id)
+            if 'full-size cover url' in movie.keys():
+                print(movie['full-size cover url'])
+                return movie['full-size cover url']
+            else:
+                return None
+        except Exception:
+            return None
 
     def _get_title(self):
         return self._title
