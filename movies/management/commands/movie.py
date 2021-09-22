@@ -117,8 +117,10 @@ class MovieToDB:
                     imdb_search = ia.search_movie(movie['title'])
                     for results in imdb_search:
                         if 'year' in results.keys():
-                            if results[0]['year'] == movie['year']:
-                                picture = MovieToDB.get_picture_imdb(results.getID())
+                            if results['year'] == movie['year']:
+                                picture = MovieToDB.get_picture_imdb(
+                                    results.getID()
+                                )
                                 MovieToDB.insert_picture_to_db(
                                     picture,
                                     movie['title'],
