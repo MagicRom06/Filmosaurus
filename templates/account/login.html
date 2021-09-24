@@ -12,6 +12,11 @@
                 {{ form|crispy }}
                 <button type="submit" class="auth-button col-12">Log in</button>
             </form>
+            <hr>
+            <div class="fancy-border m-1 text-center">
+                <a class="forgot-password" href="{% url 'account_password_reset' %}">forgot my password</a>
+            </div>
+            <hr>
         </div>
     </div>
 </section>

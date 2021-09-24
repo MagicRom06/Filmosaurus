@@ -212,3 +212,17 @@
 .asteriskField {
     visibility: hidden;
 }
+.forgot-password {
+    color: rgba(244, 238, 214);
+    text-decoration: none;
+    padding-bottom:5px;
+    background: linear-gradient(rgba(202, 121, 90), rgba(202, 121, 90)) center bottom; /*OR bottom right OR bottom left*/
+    background-size: 0% 2px;
+    background-repeat:no-repeat;
+    transition: all 0.45s;
+}
+.forgot-password:hover {
+    text-decoration: none;
+    background-size: 100% 2px;
+    color: rgba(244, 238, 214);
+}
