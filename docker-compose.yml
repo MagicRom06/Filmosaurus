@@ -17,6 +17,7 @@ services:
       - djangonetwork
   db:
     image: postgres:13
+    container_name: db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment: 
