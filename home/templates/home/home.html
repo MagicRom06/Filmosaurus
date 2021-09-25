@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load static %}
 {% block title %}Filmosaurus{% endblock title %}
 {% block body %}
 <section id="welcome" class="home-section">
@@ -16,83 +16,61 @@
             </div>
         </div>
         <hr>
-        <div class="fancy-border">
-            <div class="row welcome-row justify-content-center text-center">
-                <div type="button" data-bs-toggle="collapse" data-bs-target="#login_message" data-bs-parent="#information" aria-expanded="false" aria-controls="login_message" id="login-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10 col-10">#1 Login</div>
-                <div type="button" data-bs-toggle="collapse" data-bs-target="#search_message" data-bs-parent="#information" aria-expanded="false" aria-controls="search_message" id="search-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10 col-10">#2 Search</div>
-                <div type="button" data-bs-toggle="collapse" data-bs-target="#save_message" data-bs-parent="#information" aria-expanded="false" aria-controls="save_message" id="save-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10 col-10">#3 Save</div>
-                <div type="button" data-bs-toggle="collapse" data-bs-target="#watch_message" data-bs-parent="#information" aria-expanded="false" aria-controls="save_message" id="watch-block" class="col welcome-block col-lg-2 col-md-5 col-sm-10 col-xs-10 col-10">#4 Watch</div>
-            </div>
-            <div class="row d-none d-lg-block">
-                <div class="col-12" id="display_data">
-                    <div class="collapse welcome-collapse show" id="login_message" data-bs-parent="#display_data">
-                        <hr class="text-white">
-                        <div class="card card-body card-step">
-                            <div class="row">
+        <div class="row">
+            <div class="fancy-border">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'images/welcome-1.jpg' %}" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
                                 <div class="fancy-border">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <span class="welcome-number-steps">#1</span>
-                                        </div>
-                                        <div class="col-11">
-                                            The first step is to create an account. Go on the <a href="#">account creation page</a>, follow the instruction.
-                                        </div>
-                                    </div>
+                                    <h5>First step</h5>
+                                    <p>The first step is to create an account. Go on the <a href="#">account creation page</a>, follow the instruction.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/welcome-2.jpg' %}" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="fancy-border">
+                                    <h5>Second step</h5>
+                                    <p>Then, go to the <a href="#search">search section</a> and type the movie you have in mind.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/welcome-3.jpg' %}" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="fancy-border">
+                                    <h5>Third step</h5>
+                                    <p>Once the movie chosen, save it to your watchlist. You can add several movies in order to plan your watching program !</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/welcome-4.jpg' %}" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="fancy-border">
+                                    <h5>Last step</h5>
+                                    <p>Watch and enjoy ! but keep the most important in mind ... SVOD is good, but seeing films in a cinema, on the big screen, is better. <strong>Supports movie theaters</strong></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="collapse welcome-collapse" id="search_message" data-bs-parent="#display_data">
-                        <hr class="text-white">
-                        <div class="card card-body card-step">
-                            <div class="row">
-                                <div class="fancy-border">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <span class="welcome-number-steps">#2</span>
-                                        </div>
-                                        <div class="col-11">
-                                            Then, go to the <a href="#search">search section</a> and type the movie you have in mind.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="collapse welcome-collapse" id="save_message" data-bs-parent="#display_data">
-                        <hr class="text-white">
-                        <div class="card card-body card-step">
-                            <div class="row">
-                                <div class="fancy-border">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <span class="welcome-number-steps">#3</span>
-                                        </div>
-                                        <div class="col-11">
-                                            Once the movie chosen, save it to your watchlist. You can add several movies in order to plan your watching program !
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="collapse welcome-collapse" id="watch_message" data-bs-parent="#display_data">
-                        <hr class="text-white">
-                        <div class="card card-body card-step">
-                            <div class="row">
-                                <div class="fancy-border">
-                                    <div class="row">
-                                        <div class="col-1">
-                                            <span class="welcome-number-steps">#4</span>
-                                        </div>
-                                        <div class="col-11">
-                                            Watch and enjoy ! but keep the most important in mind ... SVOD is good, but seeing films in a cinema, on the big screen, is better. <strong>Supports movie theaters</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>
