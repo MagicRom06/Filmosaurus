@@ -188,11 +188,11 @@ AUTHENTICATION_BACKENDS = (
 )
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.monaco.mc'
-EMAIL_HOST_USER = 'romain.henry@monaco.mc'
-EMAIL_HOST_PASSWORD = 'Thomas040417!'
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'notification-filmosaurus@monaco.mc'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env('EMAIL_PORT')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
