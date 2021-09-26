@@ -11,19 +11,30 @@ services:
     depends_on: 
       - db
       - cache
+    links:
+      - db:db
+    networks:
+      - djangonetwork
   db:
-    image: postgres
+    image: postgres:11
+    container_name: db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment: 
       - "POSTGRES_HOST_AUTH_METHOD=trust"
+    networks:
+      - djangonetwork
   cache:
     image: redis
     volumes:
       - redis_data:/var/lib/redis/data/
     environment: 
       - "ALLOW_EMPTY_PASSWORD=yes"
-
+    networks:
+      - djangonetwork
+networks:
+  djangonetwork:
+    driver: bridge
 volumes:
   postgres_data:
   redis_data:

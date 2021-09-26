@@ -37,10 +37,20 @@
     height:100vh;
 }
 
+#auth {
+    background-color: rgba(114, 166, 169);
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background: linear-gradient(to bottom, rgba(114, 166, 169, 0.5) 0%, rgba(114, 166, 169, 0.3) 100%), url("../images/auth-section.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 #welcome {
     background-color: rgba(114, 166, 169);
-    padding-top: 15rem;
-    padding-bottom: calc(15rem - 4.5rem);
+    padding-top: 5rem;
+    padding-bottom: calc(5rem - 4.5rem);
     background: linear-gradient(to bottom, rgba(114, 166, 169, 0.5) 0%, rgba(114, 166, 169, 0.3) 100%), url("../images/home-section-1.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -106,7 +116,6 @@
     opacity:0;
 }
 .console-container {
-    
     font-family: 'Rye', cursive;
     font-size:35px;
     text-align:center;
@@ -155,7 +164,6 @@
 }
 .fancy-border p {
     color: whitesmoke;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
 }
 .row-search{
@@ -179,4 +187,41 @@
     background: #0B1319;
     color:white;
     font-family: 'Courier New', Courier, monospace;
+}
+.container-auth {
+    font-family: 'Rye', cursive;
+    font-size:20;
+    color:rgba(244, 238, 214);
+}
+.auth-button {
+    padding:5px;
+    margin-top:15px;
+    background: rgb(186, 75, 64);
+    color:rgba(244, 238, 214);
+    font-size:20px;
+    border-color: rgb(186, 75, 64);
+}
+.auth-form {
+    padding: 20px;
+}
+
+.auth-form input {
+    margin-bottom: 10px;
+}
+.asteriskField {
+    visibility: hidden;
+}
+.forgot-password {
+    color: rgba(244, 238, 214);
+    text-decoration: none;
+    padding-bottom:5px;
+    background: linear-gradient(rgba(202, 121, 90), rgba(202, 121, 90)) center bottom; /*OR bottom right OR bottom left*/
+    background-size: 0% 2px;
+    background-repeat:no-repeat;
+    transition: all 0.45s;
+}
+.forgot-password:hover {
+    text-decoration: none;
+    background-size: 100% 2px;
+    color: rgba(244, 238, 214);
 }
