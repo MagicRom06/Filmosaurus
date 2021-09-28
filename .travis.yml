@@ -4,7 +4,8 @@ python:
 env:
   - DJANGO_SETTINGS_MODULE="core.settings"
 services:
-  - postgres
+  - postgresql
+  - redis-server
   - docker
 install:
   - pipenv install --system

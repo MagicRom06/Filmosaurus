@@ -3,12 +3,34 @@
 {% block body %}
 <section id="results">
     <div class="container-fluid container-auth">
-        <h3 class="text-center">Search results</h3>
+        <h3 class="text-center">results for <span class="query">{{query}}</span></h3>
+        <hr>
+        <form action="{% url 'search_results' %}">
+            <div class="row row-search">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                    <input class="form-control" type="text" name="q" required>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-12">
+                    <button type="submit" class=" form-control btn btn-lg btn-search">Search</button>
+                </div>
+            </div>
+        </form>
         <hr>
         <div class="row">
             {% for movie in page_obj %}
-            <div class="col-lg-2 mb-3">
-                <img src="{{movie.picture}}" width="220" height="300">
+            <div class="col-lg-2 mb-3 container-picture">
+                <img src="{{movie.picture}}" width="220" height="300" class="image">
+                <div class="overlay">
+                    <div class=row>
+                        <div class="text">{{ movie.title }} ({{movie.year}})</div>
+                    </div>
+                    <div class=row>
+                        <div class="card-block">
+                            <button class="btn btn-outline-primary btn-picture">Detail</button>
+                            <button class="btn btn-outline-primary btn-picture">Save</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
