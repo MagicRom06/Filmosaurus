@@ -20,8 +20,6 @@ script:
   - export EMAIL_USER=test@test.mc
   - export EMAIL_PASSWORD=test1235
   - export EMAIL_PORT=587
-  - python manage.py makemigrations
-  - python manage.py migrate
   - flake8 .
   - coverage run --source="." manage.py test
   - coverage report -m
