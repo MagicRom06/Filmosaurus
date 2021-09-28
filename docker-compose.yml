@@ -24,6 +24,8 @@ services:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     networks:
       - djangonetwork
+    ports:
+       - '5432'
   cache:
     image: redis
     volumes:
