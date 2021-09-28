@@ -4,6 +4,7 @@ python:
 env:
   - DJANGO_SETTINGS_MODULE="core.settings"
 services:
+  - postgres
   - docker
 install:
   - pipenv install --system
@@ -23,6 +24,6 @@ before_script:
   - echo EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD >> .env
   - echo EMAIL_PORT=$EMAIL_PORT >> .env
   - echo DEFAULT_FROM_EMAIL=$DEFAULT_FROM_EMAIL >> .env
-  - cat .env # affiche le contenu
+  - cat .env
 script:
   - docker-compose run web sh -c " sleep 10 && flake8 . && coverage run --source="." manage.py test && coverage report -m"
