@@ -1,3 +1,5 @@
+from django.db import models
+from django.http.response import JsonResponse
 from django.views.generic import ListView
 from .models import Movie
 from django.db.models import Q

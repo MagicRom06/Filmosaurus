@@ -239,6 +239,7 @@ body {
 }
 .container-picture {
     position: relative;
+    display: block;
   }
 .overlay {
     position: absolute;
@@ -287,4 +288,18 @@ body {
   .btn-picture:hover {
       background-color: rgba(186, 75, 64) !important;
       color:whitesmoke !important;
+  }
+  .ui-menu-item {
+      padding: 5px;
+      border: none;
+  }
+  .ui-menu-item a {
+    text-decoration: none;
+    display: block;
+    border: none;
+}
+  .ui-menu-item:hover > a {
+      background-color: lightgray;
+      color:black;
+      border: none;
   }

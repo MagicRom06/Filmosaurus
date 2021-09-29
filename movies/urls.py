@@ -5,5 +5,5 @@ urlpatterns = [
     path(
         'search/', SearchResultsListView.as_view(),
         name='search_results'
-    )
+    ),
 ]
