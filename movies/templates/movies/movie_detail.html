@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+{% block title %}{{ object.title }}{% endblock title %}
+{% block body %}
+<section id="movie_detail" class="home-section">
+    <div class="container-fluid">
+        <div class="fancy-border">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 mt-4 text-center">:
+                    <img class="detail_image" src="{{ object.picture }}" width="240" height="460">
+                </div>
+                <div class="col-lg-6 col-md-12 mt-4 text-white">
+                    <h3 class="text-center text-white">{{ object.title }} ({{object.year}})</h3>
+                    <hr>
+                    <h4>Directed by:</h4>
+                    {% for director in object.directors.all %}
+                    {{director.name}}
+                    {% endfor %}
+                    <h4>Kind:</h4>
+                    {% for category in object.categories.all %}
+                    {{category.name}}
+                    {% endfor %}
+                    <h4>Casting:</h4>
+                    {% for cast in object.casts.all %}
+                    {{cast.name}} - 
+                    {% endfor %}
+                    <h4>Country:</h4>
+                    {% for country in object.countries.all %}
+                    {{country.name}}
+                    {% endfor %}
+                    <h4>Plot:</h4>
+                    {{object.plot}}
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

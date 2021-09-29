@@ -303,3 +303,6 @@ body {
       color:black;
       border: none;
   }
+  .detail_image {
+      position: relative;
+  }

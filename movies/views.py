@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Movie
 
@@ -22,3 +22,8 @@ class SearchResultsListView(ListView):
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('q')
         return context
+
+
+class MovieDetailView(DetailView):
+    model = Movie
+    template_name = 'movies/movie_detail.html'
