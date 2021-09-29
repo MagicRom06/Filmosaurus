@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.views.generic import ListView, DetailView
 
 from .models import Movie
+from .utils import Rating
 
 # Create your views here.
 
@@ -35,5 +36,5 @@ class MovieDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         movie = self.get_object()
-        print(movie.title)
+        context['ratings'] = Rating(movie.title, str(movie.year)).get()
         return context

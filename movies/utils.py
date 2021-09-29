@@ -41,9 +41,7 @@ class Allocine(Rating):
         req = Rating(
             self.title,
             self.year).request(
-                f"""
-                https://www.allocine.fr/_/autocomplete/{self.title.capitalize()}
-                """
+                f"""https://www.allocine.fr/_/autocomplete/{self.title.capitalize()}"""
             )
         for elt in req['results']:
             if elt['entity_type'] == 'movie' and \
@@ -53,7 +51,7 @@ class Allocine(Rating):
 
     def rating(self):
         if len(self.movie_requested) > 0:
-            url = 'https://www.allocine.fr/film/fichefilm_gen_cfilm={}.html'.format(
+            url = """https://www.allocine.fr/film/fichefilm_gen_cfilm={}.html""".format(
                 self.movie_requested[0]
             )
             html_page = requests.get(url)
@@ -113,5 +111,5 @@ class Imdb(Rating):
             }
 
 
-# a = Rating('seven', '1995').get()
+# print(Rating('seven', '1995').get())
 # flake8: noqa
