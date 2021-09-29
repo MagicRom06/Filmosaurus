@@ -1,6 +1,7 @@
-from django.views.generic import ListView
-from .models import Movie
 from django.db.models import Q
+from django.views.generic import ListView
+
+from .models import Movie
 
 # Create your views here.
 

@@ -1,6 +1,7 @@
-from home.views import HomePageView
 from django.test import TestCase
-from django.urls import reverse, resolve
+from django.urls import resolve, reverse
+
+from home.views import HomePageView
 
 # Create your tests here.
 

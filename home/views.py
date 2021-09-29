@@ -1,6 +1,7 @@
-from movies.models import Movie
 from django.http.response import JsonResponse
 from django.views.generic import TemplateView
+
+from movies.models import Movie
 
 # Create your views here.
 

@@ -1,5 +1,6 @@
-from movies.models import Movie, Category, Country, Person
 from django.test import TestCase
+
+from movies.models import Category, Country, Movie, Person
 
 # Create your tests here.
 
