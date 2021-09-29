@@ -27,3 +27,13 @@ class SearchResultsListView(ListView):
 class MovieDetailView(DetailView):
     model = Movie
     template_name = 'movies/movie_detail.html'
+
+    def get_object(self, **kwargs):
+        obj = Movie.objects.get(id=self.kwargs['pk'])
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        movie = self.get_object()
+        print(movie.title)
+        return context

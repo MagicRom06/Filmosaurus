@@ -240,7 +240,7 @@ body {
 .container-picture {
     position: relative;
     display: block;
-  }
+}
 .overlay {
     position: absolute;
     bottom: 100%;
@@ -251,16 +251,16 @@ body {
     width: 100%;
     height:0;
     transition: .5s ease;
-  }
-  
-  .container-picture:hover .overlay {
+}
+
+.container-picture:hover .overlay {
     bottom: 0;
     height: 100%;
     border:2px solid whitesmoke;
     opacity: 0.9;
-  }
-  
-  .text {
+}
+
+.text {
     color: white;
     font-size: 20px;
     position: absolute;
@@ -270,8 +270,8 @@ body {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-  }
-  .card-block {
+}
+.card-block {
     font-size: 20px;
     position: absolute;
     top: 80%;
@@ -280,29 +280,34 @@ body {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-  }
-  .btn-picture {
-      border: 2px solid rgba(186, 75, 64) !important;
-      color:rgba(186, 75, 64) !important;
-  }
-  .btn-picture:hover {
-      background-color: rgba(186, 75, 64) !important;
-      color:whitesmoke !important;
-  }
-  .ui-menu-item {
-      padding: 5px;
-      border: none;
-  }
-  .ui-menu-item a {
+}
+.btn-picture {
+    border: 2px solid rgba(186, 75, 64) !important;
+    color:rgba(186, 75, 64) !important;
+}
+.btn-picture:hover {
+    background-color: rgba(186, 75, 64) !important;
+    color:whitesmoke !important;
+}
+.ui-menu-item {
+    padding: 5px;
+    border: none;
+}
+.ui-menu-item a {
     text-decoration: none;
     display: block;
     border: none;
 }
-  .ui-menu-item:hover > a {
-      background-color: lightgray;
-      color:black;
-      border: none;
-  }
-  .detail_image {
-      position: relative;
-  }
+.ui-menu-item:hover > a {
+    background-color: lightgray;
+    color:black;
+    border: none;
+}
+.detail_image {
+    position: relative;
+}
+.remove-all-margin{
+    margin:0 ! important;
+    margin:0 ! important;
+    padding:0 ! important;
+}
