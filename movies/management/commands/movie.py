@@ -1,7 +1,9 @@
-from movies.models import Movie
-import imdb
 import csv
 import os
+
+import imdb
+
+from movies.models import Movie
 
 
 class MovieToDB:

@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
+import socket
 from pathlib import Path
 
 import environ
-import os
-import socket
 
 # config django-debug-toolbar
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
@@ -104,7 +104,7 @@ DATABASES = {
         'NAME': env('DB_NAME'),
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
-        'HOST': 'db',
+        'HOST': env('DB_HOST'),
         'PORT': env('DB_PORT')
     }
 }

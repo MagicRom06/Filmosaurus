@@ -5,25 +5,21 @@ env:
   - DJANGO_SETTINGS_MODULE="core.settings"
 services:
   - postgresql
-  - redis
-  - docker
+  - redis-server
 install:
   - pipenv install --system
 before_script:
-  - pip install docker-compose
-  - cd core/
-  - touch .env
-  - echo SECRET_KEY=$SECRET_KEY >> .env
-  - echo DB_NAME=$DB_NAME >> .env
-  - echo DB_USER=$DB_USER >> .env
-  - echo DB_PASSWORD=$DB_PASSWORD >> .env
-  - echo DB_HOST=$DB_HOST >> .env
-  - echo DB_PORT=$DB_PORT >> .env
-  - echo CACHE_LOCATION=$CACHE_LOCATION >> .env
-  - echo EMAIL_HOST=$EMAIL_HOST >> .env
-  - echo EMAIL_HOST_USER=$EMAIL_HOST_USER >> .env
-  - echo EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD >> .env
-  - echo EMAIL_PORT=$EMAIL_PORT >> .env
-  - echo DEFAULT_FROM_EMAIL=$DEFAULT_FROM_EMAIL >> .env
+   - psql -c 'create database filmosaurus;'
 script:
-  - docker-compose run web sh -c "flake8 . && coverage run --source="." manage.py test && coverage report -m"
+  - export SECRET_KEY='test'
+  - export DB_PASSWORD='test'
+  - export DB_USER='postgres'
+  - export DB_NAME='filmosaurus'
+  - export DB_PORT=5432
+  - export EMAIL_HOST=smtp.test.mc
+  - export EMAIL_USER=test@test.mc
+  - export EMAIL_PASSWORD=test1235
+  - export EMAIL_PORT=587
+  - flake8 .
+  - coverage run --source="." manage.py test
+  - coverage report -m

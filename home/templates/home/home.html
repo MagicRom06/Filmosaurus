@@ -84,10 +84,10 @@
                 <div class="fancy-border">
                     <span class="search-title ">Search a movie ...</span>
                     <hr class="text-white">
-                    <form>
+                    <form action="{% url 'search_results' %}">
                         <div class="row row-search">
                             <div class="col-lg-10 col-md-12 col-sm-12 col-12">
-                                <input class="form-control" type="text" required>
+                                <input id="tags" class="form-control" type="text" name="q" required>
                             </div>
                             <div class="col-lg-2 col-md-12 col-sm-12 col-12">
                                 <button type="submit" class=" form-control btn btn-search mb-3">Search</button>

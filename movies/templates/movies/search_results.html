@@ -1,0 +1,60 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block body %}
+<section id="results">
+    <div class="container-fluid container-auth">
+        <h3 class="text-center">results for <span class="query">{{query}}</span></h3>
+        <hr>
+        <form action="{% url 'search_results' %}">
+            <div class="row row-search">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                    <input id="tags" class="form-control" type="text" name="q" required>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-12">
+                    <button type="submit" class=" form-control btn btn-lg btn-search">Search</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <div class="row">
+            {% for movie in page_obj %}
+            <div class="col-lg-2 col-md-3 col-sm-6 mb-3 container-picture">
+                <img src="{{movie.picture}}" width="220" height="300" class="image">
+                <div class="overlay">
+                    <div class=row>
+                        <div class="text">{{ movie.title }} ({{movie.year}})</div>
+                    </div>
+                    <div class=row>
+                        <div class="card-block">
+                            <button class="btn btn-outline-primary btn-picture">Detail</button>
+                            <button class="btn btn-outline-primary btn-picture">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="fancy-border">
+            <div class="row">
+                <div class="pagination col-6">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                        <a href="/movies/search/?page=1&q={{ query }}">&laquo; first</a>
+                        <a href="/movies/search?/page={{ page_obj.previous_page_number }}&q={{ query }}">previous</a>
+                        {% endif %}
+                        
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        
+                        {% if page_obj.has_next %}
+                        <a href="/movies/search/?page={{ page_obj.next_page_number }}&q={{ query }}">next</a>
+                        <a href="/movies/search/?page={{ page_obj.paginator.num_pages }}&q={{ query }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

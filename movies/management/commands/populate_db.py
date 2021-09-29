@@ -1,9 +1,11 @@
 from django.core.management.base import BaseCommand
-from .movie import MovieToDB
+
+from movies.models import Category, Country, Movie, Person
+
 from .category import CategoryToDB
 from .country import CountryToDB
+from .movie import MovieToDB
 from .person import PersonToDB
-from movies.models import Movie, Country, Category, Person
 
 
 class Command(BaseCommand):
