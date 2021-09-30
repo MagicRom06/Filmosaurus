@@ -31,6 +31,28 @@
                     {{object.plot}}
                     <hr>
                 </div>
+                <div class="col-lg-3 lg-md-12 text-white">
+                    <div class="row rating-card">
+                        <h5 class="text-center"><span class="iconify" data-icon="cib:allocine"></span></h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-12">
+                                <h5 class="text-center rating-title">Press</h5>
+                                <h5 class="text-center">{{ratings.ratings.0.allocine.press}}</h5>
+                                <hr class="d-lg-none">
+                            </div>
+                            <div class="col-lg-5 col-md-12 spec-card">
+                                <h5 class="text-center rating-title">Spectator</h5>
+                                <h5 class="text-center">{{ratings.ratings.0.allocine.spectator}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row rating-card">
+                        <h5 class="text-center"><i class="fab fa-imdb"></i></h5>
+                        <hr>
+                        <h5 class="text-center">{{ratings.ratings.1.imdb}}</h5>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

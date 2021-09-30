@@ -61,14 +61,14 @@ class Allocine(Rating):
             if len(type_critic) > 1:
                 return {
                     "allocine": {
-                        type_critic[0].get_text(): f"{notes[0].get_text()}/5",
-                        type_critic[1].get_text(): f"{notes[1].get_text()}/5"
+                        "press": f"{notes[0].get_text()}/5",
+                        "spectator": f"{notes[1].get_text()}/5"
                     }
                 }
             elif len(type_critic) == 1:
                 return {
                     "allocine": {
-                        type_critic[0].get_text(): f"{notes[0].get_text()}/5",
+                        "spectator": f"{notes[0].get_text()}/5",
                     }
                 }
             else:
