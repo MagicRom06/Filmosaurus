@@ -1,0 +1,60 @@
+{% extends '_base.html' %}
+{% block title %}{{ object.title }}{% endblock title %}
+{% block body %}
+<section id="movie_detail" class="home-section">
+    <div class="container-fluid remove-all-margin">
+        <div class="fancy-border">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 mt-4 text-center">:
+                    <img class="detail_image" src="{{ object.picture }}" width="240" height="460">
+                </div>
+                <div class="col-lg-6 col-md-12 mt-4 text-white">
+                    <h3 class="text-center text-white">{{ object.title }} ({{object.year}})</h3>
+                    <hr>
+                    <h4>Directed by:</h4>
+                    {% for director in object.directors.all %}
+                    {{director.name}}
+                    {% endfor %}
+                    <h4>Kind:</h4>
+                    {% for category in object.categories.all %}
+                    {{category.name}}
+                    {% endfor %}
+                    <h4>Casting:</h4>
+                    {% for cast in object.casts.all %}
+                    {{cast.name}} - 
+                    {% endfor %}
+                    <h4>Country:</h4>
+                    {% for country in object.countries.all %}
+                    {{country.name}}
+                    {% endfor %}
+                    <h4>Plot:</h4>
+                    {{object.plot}}
+                    <hr>
+                </div>
+                <div class="col-lg-3 lg-md-12 text-white">
+                    <div class="row rating-card">
+                        <a target="_blank" href="https://www.allocine.fr/film/fichefilm_gen_cfilm={{ratings.ratings.0.allocine.id}}.html"><h5 class="text-center"><span class="iconify" data-icon="cib:allocine"></span></h5></a>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-12">
+                                <h5 class="text-center rating-title">Press</h5>
+                                <h5 class="text-center">{{ratings.ratings.0.allocine.press}}</h5>
+                                <hr class="d-lg-none">
+                            </div>
+                            <div class="col-lg-5 col-md-12 spec-card">
+                                <h5 class="text-center rating-title">Spectator</h5>
+                                <h5 class="text-center">{{ratings.ratings.0.allocine.spectator}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row rating-card">
+                        <a target="_blank" href="https://www.imdb.com/title/tt{{ratings.ratings.1.id}}/"><h5 class="text-center"><i class="fab fa-imdb"></i></h5></a>
+                        <hr>
+                        <h5 class="text-center">{{ratings.ratings.1.imdb}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

@@ -16,6 +16,8 @@ imdbpy = "*"
 django-debug-toolbar = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
+requests = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 

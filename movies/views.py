@@ -1,7 +1,8 @@
 from django.db.models import Q
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Movie
+from .utils import Rating
 
 # Create your views here.
 
@@ -21,4 +22,19 @@ class SearchResultsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('q')
+        return context
+
+
+class MovieDetailView(DetailView):
+    model = Movie
+    template_name = 'movies/movie_detail.html'
+
+    def get_object(self, **kwargs):
+        obj = Movie.objects.get(id=self.kwargs['pk'])
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        movie = self.get_object()
+        context['ratings'] = Rating(movie.title, str(movie.year)).get()
         return context

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
@@ -36,3 +37,9 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Watchlist(models.Model):
+    users = models.ManyToManyField(get_user_model())
+    movies = models.ManyToManyField(Movie)
+    seen = models.BooleanField(default=False)
