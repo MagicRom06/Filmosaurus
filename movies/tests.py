@@ -1,6 +1,6 @@
 from django.test import TestCase
-
 from movies.models import Category, Country, Movie, Person
+from django.urls import reverse
 
 # Create your tests here.
 
@@ -9,8 +9,8 @@ class MoviesTest(TestCase):
 
     def setUp(self):
         self.movie = Movie.objects.create(
-            title='test title',
-            year=1900,
+            title='The matrix',
+            year=1999,
             picture=None,
             plot='Plot TEST'
         )
@@ -27,8 +27,8 @@ class MoviesTest(TestCase):
             Person.objects.create(name="test cast"))
 
     def test_movie_listing(self):
-        self.assertEqual(f"{self.movie.title}", 'test title')
-        self.assertEqual(self.movie.year, 1900)
+        self.assertEqual(f"{self.movie.title}", 'The matrix')
+        self.assertEqual(self.movie.year, 1999)
         self.assertEqual(f"{self.movie.plot}", 'Plot TEST')
         self.assertEqual(
             f"{self.movie.categories.all()[0].name}",
@@ -46,3 +46,24 @@ class MoviesTest(TestCase):
             f"{self.movie.casts.all()[0].name}",
             'test cast'
         )
+
+    def test_movie_search_list_view(self):
+        response = self.client.get(
+            reverse('search_results'), {'q': self.movie.title}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, f'{self.movie.title}')
+        self.assertTemplateUsed(
+            response, 'movies/search_results.html'
+        )
+
+    def test_movie_detail_view(self):
+        response = self.client.get(self.movie.get_absolute_url())
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, f'{self.movie.title}')
+        self.assertTemplateUsed(
+            response, 'movies/movie_detail.html')
+
+    def test_false_movie_detail_view(self):
+        response = self.client.get(self.movie.get_absolute_url() + 'test')
+        self.assertEqual(response.status_code, 404)
