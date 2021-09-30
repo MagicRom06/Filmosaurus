@@ -62,18 +62,21 @@ class Allocine(Rating):
                 return {
                     "allocine": {
                         "press": f"{notes[0].get_text()}/5",
-                        "spectator": f"{notes[1].get_text()}/5"
+                        "spectator": f"{notes[1].get_text()}/5",
+                        "id": self.movie_requested[0]
                     }
                 }
             elif len(type_critic) == 1:
                 return {
                     "allocine": {
                         "spectator": f"{notes[0].get_text()}/5",
+                        "id": self.movie_requested[0]
                     }
                 }
             else:
                 return {
-                    "allocine": "No data"
+                    "allocine": "No data",
+                    "id": self.movie_requested[0]
                 }
         else:
             return {
@@ -103,11 +106,13 @@ class Imdb(Rating):
         if len(movie_requested) > 0:
             movie = ia.get_movie(movie_requested[0])
             return {
-                "imdb": f"{movie['rating']}/10"
+                "imdb": f"{movie['rating']}/10",
+                "id": movie_requested[0]
             }
         else:
             return {
-                "imdb": "No data"
+                "imdb": "No data",
+                "id": movie_requested[0]
             }
 
 
