@@ -1,7 +1,9 @@
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 
-from .models import Movie
+from .models import Movie, Watchlist
 from .utils import Rating
 
 # Create your views here.
@@ -28,6 +30,7 @@ class SearchResultsListView(ListView):
 class MovieDetailView(DetailView):
     model = Movie
     template_name = 'movies/movie_detail.html'
+    context_object_name = 'movie'
 
     def get_object(self, **kwargs):
         obj = Movie.objects.get(id=self.kwargs['pk'])
@@ -38,3 +41,21 @@ class MovieDetailView(DetailView):
         movie = self.get_object()
         context['ratings'] = Rating(movie.title, str(movie.year)).get()
         return context
+
+
+@login_required(login_url='account_login')
+def watchlistAddMovie(request):
+    user = request.user
+    user_movie = Movie.objects.get(id=request.GET.get('movie'))
+    if Watchlist.objects.filter(
+        user_id=user.id,
+        movie_id=user_movie.id
+    ).exists():
+        return redirect(f'/movies/get/{user_movie.id}?alreadyexists=true')
+    else:
+        query = Watchlist.objects.create(
+            user=user,
+            movie=user_movie
+        )
+        query.save()
+        return redirect(f'/movies/get/{user_movie.id}?add=true')

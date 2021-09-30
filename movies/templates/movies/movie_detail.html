@@ -5,30 +5,48 @@
     <div class="container-fluid remove-all-margin">
         <div class="fancy-border">
             <div class="row">
-                <div class="col-lg-3 col-md-12 mt-4 text-center">:
-                    <img class="detail_image" src="{{ object.picture }}" width="240" height="460">
+                <div class="col-lg-3 col-md-12 mt-4 text-center">
+                    <div class="row">
+                        <div class="col-12">
+                            <img class="detail_image col-12" src="{{ movie.picture }}" width="240" height="460">
+                        </div>
+                        <div class="col-12">
+                            <a href="{% url 'save' %}?movie={{ movie.id }}"><button class="btn btn-picture mt-3 col-12 mb-1">+ Add to watchlist</button></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-12 mt-4 text-white">
-                    <h3 class="text-center text-white">{{ object.title }} ({{object.year}})</h3>
+                    <h3 class="text-center text-white">{{ movie.title }} ({{movie.year}})</h3>
+                    {% if 'add' in request.GET %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>The movie has been added with success</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% elif 'alreadyexists' in request.GET %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>This movie has been already added in your watchlist</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
                     <hr>
                     <h4>Directed by:</h4>
-                    {% for director in object.directors.all %}
+                    {% for director in movie.directors.all %}
                     {{director.name}}
                     {% endfor %}
                     <h4>Kind:</h4>
-                    {% for category in object.categories.all %}
+                    {% for category in movie.categories.all %}
                     {{category.name}}
                     {% endfor %}
                     <h4>Casting:</h4>
-                    {% for cast in object.casts.all %}
+                    {% for cast in movie.casts.all %}
                     {{cast.name}} - 
                     {% endfor %}
                     <h4>Country:</h4>
-                    {% for country in object.countries.all %}
+                    {% for country in movie.countries.all %}
                     {{country.name}}
                     {% endfor %}
                     <h4>Plot:</h4>
-                    {{object.plot}}
+                    {{movie.plot}}
                     <hr>
                 </div>
                 <div class="col-lg-3 lg-md-12 text-white">
