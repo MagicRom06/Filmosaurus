@@ -1,5 +1,40 @@
 {% extends '_base.html' %}
-{% block title %}Account{% endblock title %}
+{% block title %}{{ object.title }}{% endblock title %}
 {% block body %}
-<h1>Account</h1>
+<section id="movie_detail" class="home-section">
+    <div class="container-fluid remove-all-margin">
+        <div class="row mt-5">
+            <div class="col-lg-6">
+                <div class="fancy-border">
+                    <h3 class="text-center text-white">Account</h3>
+                    {{user.email}} <a href="#"> Update</a>
+                    <p><a href="#">Change password</a></p>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="fancy-border">
+                    <h3 class="text-center text-white">Watchlist</h3>
+                    <hr>
+                    <ul class="watchlist_list">
+                        {% for elt in watchlist %}
+                        {% if not elt.seen %}        
+                        <li id="watchlist_li" class="watchlist_item">
+                            <div class="row align-items-center">
+                                <div class="col-lg-10 col-md-10 col-10">
+                                    <a class="watchlist_link" href="{% url 'movie_detail' elt.movie.id %}"><img class="watchlist_img m-1" src="{{ elt.movie.picture }}" width=80 height=90><span class="watchlist_title">{{ elt.movie }} ({{elt.movie.year}})</span></a>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-2 btn-col">
+                                    <button id="watchlist_btn" class="button btn btn-picture watchlist_button">viewed</button>
+                                </div>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock body %}

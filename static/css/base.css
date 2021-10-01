@@ -99,6 +99,11 @@ body {
     .spec-card {
         margin-left:15px;
     }
+    .watchlist_button {
+        margin-top: auto;
+        margin-bottom: auto;
+        visibility: hidden;
+    }
 }
 
 .container{
@@ -177,6 +182,9 @@ body {
 .fancy-border p {
     color: whitesmoke;
     font-size: 20px;
+}
+.fancy-border h3 {
+    font-family: 'Rye', cursive;
 }
 .row-search{
     font-family: 'Courier New', Courier, monospace;
@@ -329,4 +337,25 @@ body {
 }
 .rating-title {
     color:lightgray;
+}
+.watchlist_list {
+    list-style: none;
+    margin-left:0;
+    padding-left:0;
+}
+.watchlist_item {
+    margin:10px;
+    color: rgba(244, 238, 214);
+    font-size: 20px; 
+}
+.watchlist_item:hover > div div .watchlist_link{
+    color: rgba(244, 238, 214);
+}
+.watchlist_link{
+    color: rgba(244, 238, 214);    
+    display: block;
+    text-decoration: none;
+}
+.watchlist_title {
+    margin-left:25px;
 }
