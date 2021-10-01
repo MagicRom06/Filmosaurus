@@ -359,3 +359,7 @@ body {
 .watchlist_title {
     margin-left:25px;
 }
+.account_a {
+    color: rgba(244, 238, 214);
+    text-decoration: none;
+}
