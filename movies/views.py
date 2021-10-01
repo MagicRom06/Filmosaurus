@@ -60,6 +60,7 @@ def watchlistAddMovie(request):
         query.save()
         return redirect(f'/movies/get/{user_movie.id}?add=true')
 
+
 @login_required(login_url='account_login')
 def watchlistUpdateMovie(request):
     movie = Watchlist.objects.get(id=request.GET.get('id'))
