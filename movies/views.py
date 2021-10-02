@@ -1,7 +1,8 @@
-from django.db.models import Q
-from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.http.response import JsonResponse
 from django.shortcuts import redirect
+from django.views.generic import DetailView, ListView
 
 from .models import Movie, Watchlist
 from .utils import Rating
@@ -32,15 +33,18 @@ class MovieDetailView(DetailView):
     template_name = 'movies/movie_detail.html'
     context_object_name = 'movie'
 
+
+class MovieRatingJsonView(DetailView):
+    model = Movie
+
     def get_object(self, **kwargs):
         obj = Movie.objects.get(id=self.kwargs['pk'])
         return obj
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get(self, request, pk):
         movie = self.get_object()
-        context['ratings'] = Rating(movie.title, str(movie.year)).get()
-        return context
+        rating = Rating(movie.title, str(movie.year)).get()
+        return JsonResponse(rating)
 
 
 @login_required(login_url='account_login')

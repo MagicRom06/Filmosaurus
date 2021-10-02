@@ -1,9 +1,10 @@
-from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+
 from movies.models import Watchlist
 
-
 # Create your views here.
+
 
 class AccountsListView(LoginRequiredMixin, ListView):
     model = Watchlist

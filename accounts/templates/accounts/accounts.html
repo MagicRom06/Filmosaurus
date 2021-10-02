@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load static %}
 {% block title %}{{ object.title }}{% endblock title %}
 {% block body %}
 <section id="movie_detail" class="home-section">
@@ -56,4 +57,5 @@
         </div>
     </div>
 </section>
+<script src="{% static 'js/resize_responsive_button.js' %}"></script>
 {% endblock body %}

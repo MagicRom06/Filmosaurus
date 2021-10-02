@@ -69,18 +69,25 @@ class Allocine(Rating):
             elif len(type_critic) == 1:
                 return {
                     "allocine": {
+                        "press": "no data",
                         "spectator": f"{notes[0].get_text()}/5",
                         "id": self.movie_requested[0]
                     }
                 }
             else:
                 return {
-                    "allocine": "No data",
+                    "allocine": {
+                        "press": "no data",
+                        "spectator": "no data",
+                    },
                     "id": self.movie_requested[0]
                 }
         else:
             return {
-                "allocine": "No data"
+                "allocine": {
+                    "press": "no data",
+                    "spectator": "no data",
+                },
             }
 
     def requested_movie(self):

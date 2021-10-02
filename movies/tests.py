@@ -1,6 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
-from movies.models import Category, Country, Movie, Person
 from django.urls import reverse
+
+from movies.models import Category, Country, Movie, Person, Watchlist
 
 # Create your tests here.
 
@@ -8,6 +10,11 @@ from django.urls import reverse
 class MoviesTest(TestCase):
 
     def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            username='test username',
+            email="test@test.com",
+            password="test1234"
+        )
         self.movie = Movie.objects.create(
             title='The matrix',
             year=1999,
@@ -67,3 +74,12 @@ class MoviesTest(TestCase):
     def test_false_movie_detail_view(self):
         response = self.client.get(self.movie.get_absolute_url() + 'test')
         self.assertEqual(response.status_code, 404)
+
+    def test_add_movie_to_watchlist(self):
+        watchlist = Watchlist.objects.create(
+            user=self.user,
+            movie=self.movie
+        )
+        watchlist.save()
+        self.assertEqual(watchlist.user.email, 'test@test.com')
+        self.assertEqual(watchlist.movie.title, 'The matrix')

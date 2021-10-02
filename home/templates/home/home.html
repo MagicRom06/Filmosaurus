@@ -148,4 +148,19 @@
         </div>
     </div>
 </section>
-{% endblock body %}
+<script src="{% static 'js/welcome_title.js' %}"></script>
+<script>
+    $( function() {
+        $( "#tags" ).autocomplete({
+            minLength: 3,
+            source: '{% url "autocomplete" %}'
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+            let term = $('#tags').val();
+            return $( "<li>" )
+                .data( "ui-autocomplete-item", item )
+                .append( "<a href=/movies/get/"+ item.id + "><img class='mr-1' width=50 height=60 src='" + item.pic + "' />" + item.title+ " (" + item.year+ ")" + "</a>")
+                .appendTo( ul );
+            };
+        });
+    </script>
+    {% endblock body %}

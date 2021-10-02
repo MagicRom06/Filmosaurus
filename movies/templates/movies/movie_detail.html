@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-{% block title %}{{ object.title }}{% endblock title %}
+{% block title %}{{ movie.title }}{% endblock title %}
 {% block body %}
 <section id="movie_detail" class="home-section">
     <div class="container-fluid remove-all-margin">
@@ -49,30 +49,28 @@
                     {{movie.plot}}
                     <hr>
                 </div>
-                <div class="col-lg-3 lg-md-12 text-white">
-                    <div class="row rating-card">
-                        <a target="_blank" href="https://www.allocine.fr/film/fichefilm_gen_cfilm={{ratings.ratings.0.allocine.id}}.html"><h5 class="text-center"><span class="iconify" data-icon="cib:allocine"></span></h5></a>
-                        <hr>
-                        <div class="row">
-                            <div class="col-lg-5 col-md-12">
-                                <h5 class="text-center rating-title">Press</h5>
-                                <h5 class="text-center">{{ratings.ratings.0.allocine.press}}</h5>
-                                <hr class="d-lg-none">
-                            </div>
-                            <div class="col-lg-5 col-md-12 spec-card">
-                                <h5 class="text-center rating-title">Spectator</h5>
-                                <h5 class="text-center">{{ratings.ratings.0.allocine.spectator}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row rating-card">
-                        <a target="_blank" href="https://www.imdb.com/title/tt{{ratings.ratings.1.id}}/"><h5 class="text-center"><i class="fab fa-imdb"></i></h5></a>
-                        <hr>
-                        <h5 class="text-center">{{ratings.ratings.1.imdb}}</h5>
-                    </div>
+                <div class="col-lg-3 lg-md-12 text-white" id="block_rating">
+                    <div id="rainbow_loader" class="rainbow"></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+    $.ajax({
+        url: '{% url "rating" movie.pk %}',
+        type: 'get',
+        success: function(data) {
+            $("#rainbow_loader").remove();
+            $("#block_rating").append(
+                '<div class="row rating-card"><a id="allocine_link" target="_blank" href="#"><h5 class="text-center"><span class="iconify" data-icon="cib:allocine"></span></h5></a><hr><div class="row"><div class="col-lg-5 col-md-12"><h5 class="text-center rating-title">Press</h5><h5 class="text-center">' + data['ratings'][0]['allocine']['press'] + '</h5><hr class="d-lg-none"></div><div class="col-lg-5 col-md-12 spec-card"><h5 class="text-center rating-title">Spectator</h5><h5 class="text-center">'+ data['ratings'][0]['allocine']['spectator'] +'</h5></div></div></div><div class="row rating-card"><a id="imdb_link" target="_blank" href="#"><h5 class="text-center"><i class="fab fa-imdb"></i></h5></a><hr><h5 class="text-center">' + data['ratings'][1]['imdb'] + '</h5></div>'
+            )
+            $("#allocine_link").attr('href', 'https://www.allocine.fr/film/fichefilm_gen_cfilm='+ data['ratings'][0]['allocine']['id'] +'.html')
+            $("#imdb_link").attr('href', 'https://www.imdb.com/title/tt'+ data['ratings'][1]['id'] +'/')
+        },
+        failure: function(data) { 
+            console.log('Got an error dude');
+        }
+    });
+</script>
 {% endblock body %}
