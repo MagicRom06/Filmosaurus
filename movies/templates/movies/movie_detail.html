@@ -1,60 +1,76 @@
 {% extends '_base.html' %}
-{% block title %}{{ object.title }}{% endblock title %}
+{% block title %}{{ movie.title }}{% endblock title %}
 {% block body %}
 <section id="movie_detail" class="home-section">
     <div class="container-fluid remove-all-margin">
         <div class="fancy-border">
             <div class="row">
-                <div class="col-lg-3 col-md-12 mt-4 text-center">:
-                    <img class="detail_image" src="{{ object.picture }}" width="240" height="460">
+                <div class="col-lg-3 col-md-12 mt-4 text-center">
+                    <div class="row">
+                        <div class="col-12">
+                            <img class="detail_image col-12" src="{{ movie.picture }}" width="240" height="460">
+                        </div>
+                        <div class="col-12">
+                            <a href="{% url 'save' %}?movie={{ movie.id }}"><button class="btn btn-picture mt-3 col-12 mb-1">+ Add to watchlist</button></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-12 mt-4 text-white">
-                    <h3 class="text-center text-white">{{ object.title }} ({{object.year}})</h3>
+                    <h3 class="text-center text-white">{{ movie.title }} ({{movie.year}})</h3>
+                    {% if 'add' in request.GET %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>The movie has been added with success</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% elif 'alreadyexists' in request.GET %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>This movie has been already added in your watchlist</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
                     <hr>
                     <h4>Directed by:</h4>
-                    {% for director in object.directors.all %}
+                    {% for director in movie.directors.all %}
                     {{director.name}}
                     {% endfor %}
                     <h4>Kind:</h4>
-                    {% for category in object.categories.all %}
+                    {% for category in movie.categories.all %}
                     {{category.name}}
                     {% endfor %}
                     <h4>Casting:</h4>
-                    {% for cast in object.casts.all %}
+                    {% for cast in movie.casts.all %}
                     {{cast.name}} - 
                     {% endfor %}
                     <h4>Country:</h4>
-                    {% for country in object.countries.all %}
+                    {% for country in movie.countries.all %}
                     {{country.name}}
                     {% endfor %}
                     <h4>Plot:</h4>
-                    {{object.plot}}
+                    {{movie.plot}}
                     <hr>
                 </div>
-                <div class="col-lg-3 lg-md-12 text-white">
-                    <div class="row rating-card">
-                        <a target="_blank" href="https://www.allocine.fr/film/fichefilm_gen_cfilm={{ratings.ratings.0.allocine.id}}.html"><h5 class="text-center"><span class="iconify" data-icon="cib:allocine"></span></h5></a>
-                        <hr>
-                        <div class="row">
-                            <div class="col-lg-5 col-md-12">
-                                <h5 class="text-center rating-title">Press</h5>
-                                <h5 class="text-center">{{ratings.ratings.0.allocine.press}}</h5>
-                                <hr class="d-lg-none">
-                            </div>
-                            <div class="col-lg-5 col-md-12 spec-card">
-                                <h5 class="text-center rating-title">Spectator</h5>
-                                <h5 class="text-center">{{ratings.ratings.0.allocine.spectator}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row rating-card">
-                        <a target="_blank" href="https://www.imdb.com/title/tt{{ratings.ratings.1.id}}/"><h5 class="text-center"><i class="fab fa-imdb"></i></h5></a>
-                        <hr>
-                        <h5 class="text-center">{{ratings.ratings.1.imdb}}</h5>
-                    </div>
+                <div class="col-lg-3 lg-md-12 text-white" id="block_rating">
+                    <div id="rainbow_loader" class="rainbow"></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+    $.ajax({
+        url: '{% url "rating" movie.pk %}',
+        type: 'get',
+        success: function(data) {
+            $("#rainbow_loader").remove();
+            $("#block_rating").append(
+                '<div class="row rating-card"><a id="allocine_link" target="_blank" href="#"><h5 class="text-center"><span class="iconify" data-icon="cib:allocine"></span></h5></a><hr><div class="row"><div class="col-lg-5 col-md-12"><h5 class="text-center rating-title">Press</h5><h5 class="text-center">' + data['ratings'][0]['allocine']['press'] + '</h5><hr class="d-lg-none"></div><div class="col-lg-5 col-md-12 spec-card"><h5 class="text-center rating-title">Spectator</h5><h5 class="text-center">'+ data['ratings'][0]['allocine']['spectator'] +'</h5></div></div></div><div class="row rating-card"><a id="imdb_link" target="_blank" href="#"><h5 class="text-center"><i class="fab fa-imdb"></i></h5></a><hr><h5 class="text-center">' + data['ratings'][1]['imdb'] + '</h5></div>'
+            )
+            $("#allocine_link").attr('href', 'https://www.allocine.fr/film/fichefilm_gen_cfilm='+ data['ratings'][0]['allocine']['id'] +'.html')
+            $("#imdb_link").attr('href', 'https://www.imdb.com/title/tt'+ data['ratings'][1]['id'] +'/')
+        },
+        failure: function(data) { 
+            console.log('Got an error dude');
+        }
+    });
+</script>
 {% endblock body %}

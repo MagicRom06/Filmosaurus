@@ -1,6 +1,8 @@
 from django.urls import path
 
-from .views import SearchResultsListView, MovieDetailView
+from .views import (MovieDetailView, MovieRatingJsonView,
+                    SearchResultsListView, watchlistAddMovie,
+                    watchlistUpdateMovie)
 
 urlpatterns = [
     path(
@@ -12,4 +14,7 @@ urlpatterns = [
         MovieDetailView.as_view(),
         name='movie_detail'
     ),
+    path('rating/<int:pk>', MovieRatingJsonView.as_view(), name='rating'),
+    path('save/', watchlistAddMovie, name='save'),
+    path('update/', watchlistUpdateMovie, name='update')
 ]

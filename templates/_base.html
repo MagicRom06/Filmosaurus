@@ -17,31 +17,14 @@
 </head>
 <body>
     {% include 'navbar.html' %}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {% block body %}
     {% endblock body %}
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://kit.fontawesome.com/7974fe88be.js" crossorigin="anonymous"></script>
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
     <script src="{% static 'js/base.js' %}"></script>
-    <script>
-        $( function() {
-            $( "#tags" ).autocomplete({
-                minLength: 3,
-                source: '{% url "autocomplete" %}'
-            }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-                let term = $('#tags').val();
-                return $( "<li>" )
-                    .data( "ui-autocomplete-item", item )
-                    .append( "<a href=/movies/get/"+ item.id + "><img class='mr-1' width=50 height=60 src='" + item.pic + "' />" + item.title+ " (" + item.year+ ")" + "</a>")
-                    .appendTo( ul );
-                };;
-            });
-            $('.ui-menu').click(function(){
-                alert('test');
-            })
-        </script>
-    </body>
-    </html>
+</body>
+</html>
