@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
+from datetime import datetime
 
 from movies.models import Category, Country, Movie, Person, Watchlist
 
@@ -78,8 +79,13 @@ class MoviesTest(TestCase):
     def test_add_movie_to_watchlist(self):
         watchlist = Watchlist.objects.create(
             user=self.user,
-            movie=self.movie
+            movie=self.movie,
+            saved_date=datetime.now()
         )
         watchlist.save()
         self.assertEqual(watchlist.user.email, 'test@test.com')
         self.assertEqual(watchlist.movie.title, 'The matrix')
+        self.assertFalse(watchlist.seen)
+    
+    def test_update_movie_to_viewed(self):
+        pass
