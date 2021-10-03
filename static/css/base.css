@@ -419,3 +419,9 @@ body {
       clip-path: inset(0 0 50% 0);
       overflow: hidden;
       position: absolute; }
+
+      .watchlist_date{
+          font-size: 13px;
+          color:grey;
+          margin-left: 5px;
+      }

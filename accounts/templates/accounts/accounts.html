@@ -23,7 +23,7 @@
                         <li id="watchlist_li" class="watchlist_item">
                             <div class="row align-items-center">
                                 <div class="col-lg-10 col-md-10 col-10">
-                                    <a class="watchlist_link" href="{% url 'movie_detail' elt.movie.id %}"><img class="watchlist_img m-1" src="{{ elt.movie.picture }}" width=80 height=90><span class="watchlist_title">{{ elt.movie }} ({{elt.movie.year}})</span></a>
+                                    <a class="watchlist_link" href="{% url 'movie_detail' elt.movie.id %}"><img class="watchlist_img m-1" src="{{ elt.movie.picture }}" width=80 height=90><span class="watchlist_title">{{ elt.movie }} ({{elt.movie.year}})</span><span class="watchlist_date">saved at {{elt.saved_date|date:"d/m/Y, G:i:s"}}</span></a>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-2 btn-col">
                                     <a href="{% url 'update' %}?id={{ elt.id }}"><button id="watchlist_btn" class="button btn btn-picture watchlist_button">viewed</button></a>
@@ -45,7 +45,7 @@
                         <li id="watchlist_li" class="watchlist_item">
                             <div class="row align-items-center">
                                 <div class="col-lg-10 col-md-10 col-10">
-                                    <a class="watchlist_link" href="{% url 'movie_detail' elt.movie.id %}"><img class="watchlist_img m-1" src="{{ elt.movie.picture }}" width=80 height=90><span class="watchlist_title">{{ elt.movie }} ({{elt.movie.year}})</span></a>
+                                    <a class="watchlist_link" href="{% url 'movie_detail' elt.movie.id %}"><img class="watchlist_img m-1" src="{{ elt.movie.picture }}" width=80 height=90><span class="watchlist_title">{{ elt.movie }} ({{elt.movie.year}})</span><span class="watchlist_date">viewed at {{elt.viewed_date|date:"d/m/Y, G:i:s"}}</span></a>
                                 </div>
                             </div>
                         </li>

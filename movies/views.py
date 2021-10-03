@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http.response import JsonResponse
@@ -33,6 +35,20 @@ class MovieDetailView(DetailView):
     template_name = 'movies/movie_detail.html'
     context_object_name = 'movie'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        saved_movies = Watchlist.objects.filter(
+            user_id=self.request.user.id,
+        )
+        for movie in saved_movies:
+            if movie.movie_id == self.get_object().id and \
+               movie.seen is True:
+                context['viewed'] = False
+            elif movie.movie_id == self.get_object().id and \
+                    movie.seen is False:
+                context['viewed'] = True
+        return context
+
 
 class MovieRatingJsonView(DetailView):
     model = Movie
@@ -53,21 +69,24 @@ def watchlistAddMovie(request):
     user_movie = Movie.objects.get(id=request.GET.get('movie'))
     if Watchlist.objects.filter(
         user_id=user.id,
-        movie_id=user_movie.id
+        movie_id=user_movie.id,
+        seen=False
     ).exists():
-        return redirect(f'/movies/get/{user_movie.id}?alreadyexists=true')
+        return redirect(f'/movies/get/{user_movie.id}')
     else:
         query = Watchlist.objects.create(
             user=user,
-            movie=user_movie
+            movie=user_movie,
+            saved_date=datetime.now()
         )
         query.save()
-        return redirect(f'/movies/get/{user_movie.id}?add=true')
+        return redirect(f'/movies/get/{user_movie.id}')
 
 
 @login_required(login_url='account_login')
 def watchlistUpdateMovie(request):
     movie = Watchlist.objects.get(id=request.GET.get('id'))
     movie.seen = True
+    movie.viewed_date = datetime.now()
     movie.save()
     return redirect('accounts')

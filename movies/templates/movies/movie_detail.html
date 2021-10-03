@@ -11,23 +11,16 @@
                             <img class="detail_image col-12" src="{{ movie.picture }}" width="240" height="460">
                         </div>
                         <div class="col-12">
+                            {% if viewed %}
+                            <a><button class="btn btn-outline-success mt-3 col-12 mb-1"><i class="fas fa-check"></i> Saved</button></a>
+                            {% else %}
                             <a href="{% url 'save' %}?movie={{ movie.id }}"><button class="btn btn-picture mt-3 col-12 mb-1">+ Add to watchlist</button></a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 mt-4 text-white">
                     <h3 class="text-center text-white">{{ movie.title }} ({{movie.year}})</h3>
-                    {% if 'add' in request.GET %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>The movie has been added with success</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    {% elif 'alreadyexists' in request.GET %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>This movie has been already added in your watchlist</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    {% endif %}
                     <hr>
                     <h4>Directed by:</h4>
                     {% for director in movie.directors.all %}

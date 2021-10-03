@@ -58,3 +58,5 @@ class Watchlist(models.Model):
         default=None
     )
     seen = models.BooleanField(default=False)
+    viewed_date = models.DateTimeField(null=True, blank=True)
+    saved_date = models.DateTimeField(default=None)
