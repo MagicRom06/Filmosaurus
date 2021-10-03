@@ -86,6 +86,6 @@ class MoviesTest(TestCase):
         self.assertEqual(watchlist.user.email, 'test@test.com')
         self.assertEqual(watchlist.movie.title, 'The matrix')
         self.assertFalse(watchlist.seen)
-    
+
     def test_update_movie_to_viewed(self):
         pass
