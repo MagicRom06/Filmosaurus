@@ -18,6 +18,7 @@ django-allauth = "*"
 django-crispy-forms = "*"
 requests = "*"
 beautifulsoup4 = "*"
+mock = "*"
 
 [dev-packages]
 

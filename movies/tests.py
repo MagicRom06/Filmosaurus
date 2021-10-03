@@ -2,8 +2,10 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 from datetime import datetime
+from mock import mock
 
 from movies.models import Category, Country, Movie, Person, Watchlist
+from movies.views import MovieRatingJsonView
 
 # Create your tests here.
 
@@ -54,6 +56,20 @@ class MoviesTest(TestCase):
             f"{self.movie.casts.all()[0].name}",
             'test cast'
         )
+    
+    def test_create_country(self):
+        self.country = Country.objects.create(
+            name='test_country'
+        )
+        self.assertEqual(self.country.name, 'test_country')
+        self.assertEqual(Country.objects.all()[1].name, self.country.name)
+    
+    def test_create_category(self):
+        self.category = Category.objects.create(
+            name='test_category'
+        )
+        self.assertEqual(self.category.name, 'test_category')
+        self.assertEqual(Category.objects.all()[1].name, self.category.name)
 
     def test_movie_search_list_view(self):
         response = self.client.get(
@@ -89,3 +105,17 @@ class MoviesTest(TestCase):
 
     def test_update_movie_to_viewed(self):
         pass
+
+    def test_rating_return_json(self):
+        response = self.client.get(f'/movies/rating/{self.movie.id}')
+        self.assertEqual(response.status_code, 200)
+
+    def test_save_movie_to_watchlist_without_logging(self):
+        response = self.client.get(reverse('save'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_save_movie_to_watchlist_with_loggin(self):
+        self.client.login(username=self.user.username, password=self.user.password)
+        response = self.client.get(f'/movies/save/?movie={self.movie.id}')
+        self.assertEqual(response.status_code, 302)
+        # self.assertEqual(Watchlist.objects.all()[0].user_id, self.user.id)
