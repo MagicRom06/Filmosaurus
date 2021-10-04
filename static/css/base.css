@@ -425,3 +425,6 @@ body {
           color:grey;
           margin-left: 5px;
       }
+      label {
+          color:white !important;
+      }

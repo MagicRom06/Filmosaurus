@@ -120,4 +120,3 @@ class MoviesTest(TestCase):
         )
         response = self.client.get(f'/movies/save/?movie={self.movie.id}')
         self.assertEqual(response.status_code, 302)
-        # self.assertEqual(Watchlist.objects.all()[0].user_id, self.user.id)

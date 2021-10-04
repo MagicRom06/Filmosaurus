@@ -9,7 +9,7 @@
                 <div class="fancy-border">
                     <h3 class="text-center text-white">Account</h3>
                     <hr>
-                    <h5 class="account_a">Email: {{user.email}} - <a class="account_a" href="#"><i class="fas fa-edit"></i></a></h5> 
+                    <h5 class="account_a">Email: {{user.email}} - <a class="account_a" href="{% url 'update' user.id %}"><i class="fas fa-edit"></i></a></h5> 
                     <h5><a class="account_a" href="{% url 'account_change_password' %}">Change password</a></h5>
                 </div>
             </div>

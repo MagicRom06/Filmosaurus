@@ -10,7 +10,7 @@ class AccountsTest(TestCase):
 
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username='test_username',
+            username='test@test.com',
             email="test@test.com",
             password="test1234"
         )
@@ -22,7 +22,7 @@ class AccountsTest(TestCase):
         self.client.login(username='test@test.com', password='test1234')
         response = self.client.get(reverse('accounts'))
         self.assertEqual(response.status_code, 200)
-        # self.assertContains(response, self.user.email)
+        self.assertContains(response, self.user.email)
         self.assertTemplateUsed(response, 'accounts/accounts.html')
 
     def test_reset_password_page(self):
