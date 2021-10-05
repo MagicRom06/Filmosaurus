@@ -70,6 +70,22 @@ class MoviesTest(TestCase):
         self.assertEqual(self.category.name, 'test_category')
         self.assertEqual(Category.objects.all()[1].name, self.category.name)
 
+    def test_str_movie_is_equal_to_title(self):
+        movie = Movie.objects.get(title=self.movie.title)
+        self.assertEqual(str(movie), movie.title)
+
+    def test_str_country_is_equal_to_title(self):
+        country = Country.objects.get(name='test country')
+        self.assertEqual(str(country), country.name)
+
+    def test_str_category_is_equal_to_title(self):
+        category = Category.objects.get(name='test category')
+        self.assertEqual(str(category), category.name)
+
+    def test_str_person_is_equal_to_title(self):
+        person = Person.objects.get(name='test director')
+        self.assertEqual(str(person), person.name)
+
     def test_movie_search_list_view(self):
         response = self.client.get(
             reverse('search_results'), {'q': self.movie.title}
