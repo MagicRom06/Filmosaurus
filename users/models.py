@@ -5,6 +5,6 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     """
-    custom user
+    custom user model
     """
     pass
