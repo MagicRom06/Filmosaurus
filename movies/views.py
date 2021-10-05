@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http.response import JsonResponse
 from django.shortcuts import redirect
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
-from .models import Movie, Watchlist
+from .models import Movie, Person, Watchlist
 from .utils import Rating
 
 # Create your views here.
@@ -61,6 +61,50 @@ class MovieRatingJsonView(DetailView):
         movie = self.get_object()
         rating = Rating(movie.title, str(movie.year)).get()
         return JsonResponse(rating)
+
+
+class MovieAdvancedSearchTemplateView(TemplateView):
+    template_name = 'movies/advanced_search.html'
+
+
+class MovieAdvancedSearchResultsByDirector(ListView):
+    model = Movie
+
+    def get(self, request):
+        results = list()
+        if self.request.GET.get('by_director'):
+            search = self.request.GET.get('by_director')
+            directors = Person.objects.filter(name__contains=search.title())
+            for director in directors:
+                if Movie.objects.filter(directors=director.id).exists():
+                    results.append(
+                        {
+                            "director": director.name,
+                            "movies": list(
+                                Movie.objects.filter(
+                                    directors=director.id
+                                ).values_list(
+                                    'id', 'title', 'year', 'picture'
+                                )
+                            )
+                        }
+                    )
+        elif self.request.GET.get('by_casting'):
+            search = self.request.GET.get('by_casting')
+            actors = Person.objects.filter(name__contains=search.title())
+            for actor in actors:
+                if Movie.objects.filter(casts=actor.id).exists():
+                    results.append(
+                        {
+                            "actor": actor.name,
+                            "movies": list(
+                                Movie.objects.filter(
+                                    casts=actor.id
+                                ).values_list('id', 'title', 'year', 'picture')
+                            )
+                        }
+                    )
+        return JsonResponse(results, safe=False)
 
 
 @login_required(login_url='account_login')

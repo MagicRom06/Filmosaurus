@@ -1,0 +1,41 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block body %}
+<section id="results">
+    <div class="container-fluid container-auth">
+        <h3 class="text-center">Advanced Search</h3>
+        <hr>
+        <div class="row row-search">
+            <div class="block-advanced-search col-lg-4 col-md-6">
+                <form action="#">
+                    <div class="row">
+                        <div class="col-9 col-xl-9 col-12">
+                            <input id="input_for_directors" type="text" class="form-control" placeholder="Search by director">
+                        </div>
+                        <div class="col-3 col-xl-3 col-12">
+                            <button id="button_search_director" type="button" class=" form-control btn btn-lg btn-search">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="block-advanced-search col-lg-4 col-md-6">
+                <form action="#">
+                    <div class="row">
+                        <div class="col-9 col-xl-9 col-12">
+                            <input id="input_for_casting" type="text" class="form-control" placeholder="Search by casting">
+                        </div>
+                        <div class="col-3 col-xl-3 col-12">
+                            <button id="button_search_casting" type="button" class=" form-control btn btn-lg btn-search">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div id="advanced_results">
+        </div>
+    </div>
+</section>
+<script src="{% static 'js/advanced_search_actors.js' %}"></script>
+<script src="{% static 'js/advanced_search_directors.js' %}"></script>
+{% endblock body %}
