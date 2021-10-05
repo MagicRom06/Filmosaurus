@@ -7,10 +7,17 @@ from movies.models import Movie
 
 
 class HomePageView(TemplateView):
+    """
+    displaying home page
+    """
     template_name = 'home/home.html'
 
 
 def autocomplete(request):
+    """
+    view used to displaying autocomplete suggestions
+    when user type a movie in the home search bar
+    """
     if 'term' in request.GET:
         qs = Movie.objects.filter(
             title__istartswith=request.GET.get('term')

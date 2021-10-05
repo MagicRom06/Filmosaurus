@@ -13,29 +13,45 @@ from .utils import Rating
 
 
 class SearchResultsListView(ListView):
+    """
+    view used to display search results
+    """
     paginate_by = 12
     model = Movie
     context_object_name = 'movie_list'
     template_name = 'movies/search_results.html'
 
     def get_queryset(self):
+        """
+        specify the query we need
+        """
         query = self.request.GET.get('q')
         return Movie.objects.filter(
             Q(title__icontains=query)
         )
 
     def get_context_data(self, **kwargs):
+        """
+        send initial query to template
+        """
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('q')
         return context
 
 
 class MovieDetailView(DetailView):
+    """
+    class used to display movie detail
+    """
     model = Movie
     template_name = 'movies/movie_detail.html'
     context_object_name = 'movie'
 
     def get_context_data(self, **kwargs):
+        """
+        send information to template if the user has
+        already saved the movie in watchlist
+        """
         context = super().get_context_data(**kwargs)
         saved_movies = Watchlist.objects.filter(
             user_id=self.request.user.id,
@@ -51,26 +67,46 @@ class MovieDetailView(DetailView):
 
 
 class MovieRatingJsonView(DetailView):
+    """
+    view used for displaying rating in template
+    """
     model = Movie
 
     def get_object(self, **kwargs):
+        """
+        get the movie selected by user
+        """
         obj = Movie.objects.get(id=self.kwargs['pk'])
         return obj
 
     def get(self, request, pk):
+        """
+        return json with rating
+        """
         movie = self.get_object()
         rating = Rating(movie.title, str(movie.year)).get()
         return JsonResponse(rating)
 
 
 class MovieAdvancedSearchTemplateView(TemplateView):
+    """
+    displaying advanced search page
+    """
     template_name = 'movies/advanced_search.html'
 
 
 class MovieAdvancedSearchResultsByDirector(ListView):
+    """
+    used for displaying advanced search for directors
+    or casting
+    """
     model = Movie
 
     def get(self, request):
+        """
+        return json with the movie directed by the searched
+        director ou movie with the searched actor
+        """
         results = list()
         if self.request.GET.get('by_director'):
             search = self.request.GET.get('by_director')
@@ -109,6 +145,9 @@ class MovieAdvancedSearchResultsByDirector(ListView):
 
 @login_required(login_url='account_login')
 def watchlistAddMovie(request):
+    """
+    used for adding movie in watchlist
+    """
     user = request.user
     user_movie = Movie.objects.get(id=request.GET.get('movie'))
     if Watchlist.objects.filter(
@@ -129,6 +168,9 @@ def watchlistAddMovie(request):
 
 @login_required(login_url='account_login')
 def watchlistUpdateMovie(request):
+    """
+    used for specifying a movie has been viewed by user
+    """
     movie = Watchlist.objects.get(id=request.GET.get('id'))
     movie.seen = True
     movie.viewed_date = datetime.now()

@@ -5,24 +5,40 @@ from bs4 import BeautifulSoup
 
 class Rating:
 
+    """
+    class used to get rating from a movie
+    """
     def __init__(self, title, year):
         self.title = title
         self.year = year
 
     def request(self, url):
+        """
+        make request to an url and return json
+        """
         search = url
         response = requests.get(search)
         return response.json()
 
     def get_allocine(self):
+        """
+        get allocine rating
+        """
         allocine = Allocine(self.title, self.year)
         allocine.load()
         return allocine.rating()
 
     def get_imdb(self):
+        """
+        get imdb rating
+        """
         return Imdb(self.title, self.year).rating()
 
     def get(self):
+        """
+        get final json that will be used in view
+        to display rating
+        """
         response = dict()
         response['ratings'] = [
             self.get_allocine(),
@@ -32,12 +48,17 @@ class Rating:
 
 
 class Allocine(Rating):
-
+    """
+    class used to get allocine rating
+    """
     def __init__(self, title, year):
         Rating.__init__(self, title, year)
         self.movie_requested = list()
 
     def load(self):
+        """
+        load data from allocine site with title
+        """
         req = Rating(
             self.title,
             self.year).request(
@@ -50,6 +71,9 @@ class Allocine(Rating):
                 self.movie_requested.append(elt['entity_id'])
 
     def rating(self):
+        """
+        get rating
+        """
         if len(self.movie_requested) > 0:
             url = """https://www.allocine.fr/film/fichefilm_gen_cfilm={}.html""".format(
                 self.movie_requested[0]
@@ -95,11 +119,16 @@ class Allocine(Rating):
 
 
 class Imdb(Rating):
-
+    """
+    get rating from imdb
+    """
     def __init__(self, title, year):
         Rating.__init__(self, title, year)
 
     def rating(self):
+        """
+        get rating
+        """
         ia = imdb.IMDb()
         movie_requested = list()
         search = ia.search_movie(self.title)
@@ -123,5 +152,4 @@ class Imdb(Rating):
             }
 
 
-# print(Rating('seven', '1995').get())
 # flake8: noqa

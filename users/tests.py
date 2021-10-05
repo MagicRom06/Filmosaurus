@@ -5,7 +5,9 @@ from django.test import TestCase
 
 
 class CustomUserTests(TestCase):
-
+    """
+    testing new user creation
+    """
     def test_create_user(self):
         User = get_user_model()
         user = User.objects.create_user(
@@ -20,6 +22,9 @@ class CustomUserTests(TestCase):
         self.assertFalse(user.is_superuser)
 
     def test_create_superuser(self):
+        """
+        testing new super user creation
+        """
         User = get_user_model()
         user = User.objects.create_superuser(
             username='super_test_user',
