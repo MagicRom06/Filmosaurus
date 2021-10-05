@@ -79,8 +79,14 @@ class MovieAdvancedSearchResultsByDirector(ListView):
                 if Movie.objects.filter(directors=director.id).exists():
                     results.append(
                         {
-                            "director" : director.name,
-                            "movies": list(Movie.objects.filter(directors=director.id).values_list('id', 'title', 'year', 'picture'))
+                            "director": director.name,
+                            "movies": list(
+                                Movie.objects.filter(
+                                    directors=director.id
+                                ).values_list(
+                                    'id', 'title', 'year', 'picture'
+                                )
+                            )
                         }
                     )
         elif self.request.GET.get('by_casting'):
@@ -90,8 +96,12 @@ class MovieAdvancedSearchResultsByDirector(ListView):
                 if Movie.objects.filter(casts=actor.id).exists():
                     results.append(
                         {
-                            "actor" : actor.name,
-                            "movies": list(Movie.objects.filter(casts=actor.id).values_list('id', 'title', 'year', 'picture'))
+                            "actor": actor.name,
+                            "movies": list(
+                                Movie.objects.filter(
+                                    casts=actor.id
+                                ).values_list('id', 'title', 'year', 'picture')
+                            )
                         }
                     )
         return JsonResponse(results, safe=False)
