@@ -9,6 +9,9 @@ from movies.models import Watchlist
 
 
 class AccountsListView(LoginRequiredMixin, ListView):
+    """
+    Displaying accounts page with watchlist
+    """
     model = Watchlist
     context_object_name = 'watchlist'
     template_name = 'accounts/accounts.html'
@@ -20,6 +23,9 @@ class AccountsListView(LoginRequiredMixin, ListView):
 
 
 class EmailUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    view used to change the user email adress
+    """
     model = get_user_model()
     template_name = 'accounts/email_update.html'
     fields = ['email']

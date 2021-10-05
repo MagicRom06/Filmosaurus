@@ -7,6 +7,9 @@ from django.urls import reverse
 
 
 class Category(models.Model):
+    """
+    used for movies categories
+    """
     name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -14,6 +17,9 @@ class Category(models.Model):
 
 
 class Person(models.Model):
+    """
+    used for movies directors and casting
+    """
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -21,6 +27,9 @@ class Person(models.Model):
 
 
 class Country(models.Model):
+    """
+    used for movies countries
+    """
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -28,6 +37,9 @@ class Country(models.Model):
 
 
 class Movie(models.Model):
+    """
+    used for represents movies
+    """
     title = models.CharField(max_length=255)
     year = models.PositiveIntegerField()
     picture = models.TextField(null=True)
@@ -45,6 +57,9 @@ class Movie(models.Model):
 
 
 class Watchlist(models.Model):
+    """
+    used for watchlist users
+    """
     user = models.ForeignKey(
         get_user_model(),
         on_delete=CASCADE,

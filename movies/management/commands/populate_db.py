@@ -12,25 +12,25 @@ class Command(BaseCommand):
     help = 'Populate the database'
 
     def handle(self, *args, **kwargs):
-        """
         csv = MovieToDB.load()
         for row in csv:
             title = row[1]
             original_title = row[2]
             year = row[3]
             try:
-                movie = Movie.objects.get(title=title, year=year)
+                movie = Movie.objects.get(
+                    title=title,
+                    year=year
+                )
                 movie.title = original_title
                 movie.save()
-            except:
+            except Exception:
                 pass
-        """
-        # movies = MovieToDB.parse(csv)
-        # print(movies)
-        # self.insert_categories_to_db(movies)
-        # self.insert_countries_to_db(movies)
-        # self.insert_cast_to_db(movies)
-        # self.insert_movies_to_db(movies)
+        movies = MovieToDB.parse(csv)
+        self.insert_categories_to_db(movies)
+        self.insert_countries_to_db(movies)
+        self.insert_cast_to_db(movies)
+        self.insert_movies_to_db(movies)
         MovieToDB.get_picture()
 
     def insert_movies_to_db(self, movies_list):
