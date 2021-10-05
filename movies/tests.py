@@ -113,6 +113,26 @@ class MoviesTest(TestCase):
         response = self.client.get(reverse('save'))
         self.assertEqual(response.status_code, 302)
 
+    def test_advanced_search_view(self):
+        response = self.client.get(reverse('advanced_search'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Advanced Search')
+        self.assertTemplateUsed(
+            response, 'movies/advanced_search.html'
+        )
+
+    def test_advanced_search_for_director(self):
+        response = self.client.get(
+            '/movies/advanced/search/results?by_director=test'
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_advanced_search_for_actor(self):
+        response = self.client.get(
+            '/movies/advanced/search/results?by_casting=test'
+        )
+        self.assertEqual(response.status_code, 200)
+
     def test_save_movie_to_watchlist_with_loggin(self):
         self.client.login(
             username=self.user.username,
