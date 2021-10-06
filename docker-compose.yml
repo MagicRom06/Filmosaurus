@@ -13,6 +13,8 @@ services:
       - cache
     links:
       - db:db
+    env_file:
+      - ./core/.env
     networks:
       - djangonetwork
   db:
