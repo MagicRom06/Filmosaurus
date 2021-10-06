@@ -35,7 +35,8 @@ ENVIRONMENT = env('ENVIRONMENT')
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+if ENVIRONMENT == 'development':
+    DEBUG = True
 
 ALLOWED_HOSTS = ['35.180.133.182', 'localhost']
 
@@ -210,6 +211,7 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 180
 
 # security parameters for deployment
 if ENVIRONMENT == 'production':
+    DEBUG = False
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
     # SECURE_SSL_REDIRECT = True
