@@ -19,6 +19,7 @@ django-crispy-forms = "*"
 requests = "*"
 beautifulsoup4 = "*"
 mock = "*"
+whitenoise = "*"
 
 [dev-packages]
 
