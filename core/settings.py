@@ -38,7 +38,11 @@ SECRET_KEY = env('SECRET_KEY')
 if ENVIRONMENT == 'development':
     DEBUG = True
 
-ALLOWED_HOSTS = ['35.180.133.182', 'localhost']
+ALLOWED_HOSTS = [
+    '35.180.133.182',
+    'localhost',
+    '13.36.2.235',
+]
 
 
 # Application definition
