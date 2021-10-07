@@ -42,6 +42,8 @@ ALLOWED_HOSTS = [
     '35.180.133.182',
     'localhost',
     '13.36.2.235',
+    'filmosaurus.net',
+    'www.filmosaurus.net',
 ]
 
 
