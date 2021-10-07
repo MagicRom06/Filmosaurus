@@ -22,6 +22,7 @@ mock = "*"
 whitenoise = "*"
 gunicorn = "*"
 sentry-sdk = "*"
+newrelic = "*"
 
 [dev-packages]
 
