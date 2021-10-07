@@ -20,6 +20,7 @@ requests = "*"
 beautifulsoup4 = "*"
 mock = "*"
 whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 
