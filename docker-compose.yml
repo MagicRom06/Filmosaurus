@@ -1,9 +1,9 @@
-version: '3.8'
+version: '3.3'
 
 services:
   web:
     build: .
-    command: python /code/manage.py runserver 0.0.0.0:8000
+    command: newrelic-admin run-program gunicorn core.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
@@ -13,6 +13,8 @@ services:
       - cache
     links:
       - db:db
+    env_file:
+      - ./core/.env
     networks:
       - djangonetwork
   db:

@@ -19,6 +19,10 @@ django-crispy-forms = "*"
 requests = "*"
 beautifulsoup4 = "*"
 mock = "*"
+whitenoise = "*"
+gunicorn = "*"
+sentry-sdk = "*"
+newrelic = "*"
 
 [dev-packages]
 
