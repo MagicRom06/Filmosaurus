@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 import socket
+import sentry_sdk
 from pathlib import Path
+from sentry_sdk.integrations.django import DjangoIntegration
 
 import environ
 
@@ -217,6 +219,15 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 3
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 180
 
+# Sentry config
+sentry_sdk.init(
+    dsn=("https://793157fbf36546c384f9b48c3476f50e@o890818."
+         "ingest.sentry.io/5997629"),
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+    send_default_pii=True
+)
+
 # security parameters for deployment
 if ENVIRONMENT == 'production':
     DEBUG = False
@@ -227,9 +238,9 @@ if ENVIRONMENT == 'production':
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
-    SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = True
     USE_X_FORWARDED_HOST = True
-    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = True
     SECURE_PROXY_SSL_HEADER = (
         'HTTP_X_FORWARDED_PROTO', 'https'
     )
